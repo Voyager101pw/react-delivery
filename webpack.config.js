@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
-        use: 'asset/resource',
+        type: 'asset/resource',
       },
     ],
   },
