@@ -5,7 +5,7 @@ function Logo() {
   return (
     <div className="header__logo">
       <img src={pizzaLogo} alt="sign_logo" className='logo-icon'/>
-      <div className="content">
+      <div className="header__logo__content">
         <p>REACT PIZZA</p>
         <span className='lead'>самая вкусная пицца во вселенной</span>
       </div>

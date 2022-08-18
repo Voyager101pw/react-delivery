@@ -16,10 +16,3 @@ function Catigories() {
 }
 
 export default Catigories;
-
-// import vector from '../assets/img/Vector.svg';
-// const currentSort = 'популярности';
-//  <div className="sort">
-//   <img src={vector} />
-//   <span>{`Сортировка по:  ${currentSort}`}</span>
-//  </div>

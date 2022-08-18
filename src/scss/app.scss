@@ -1,6 +1,8 @@
 @import './fonts';
 @import './variables';
 
+@import './libs/normalize';
+
 @import './components/all';
 
 #root {
@@ -25,15 +27,11 @@
 
   .filters {
     display: flex;
-
     width: 90%;
+
     margin: 40px auto;
-    // padding: 0px auto;
     // justify-content: center;
     align-items: center;
-    
-    background:goldenrod;
-    
   
     @media (max-width: 768px) {
       flex-direction: column;
@@ -43,4 +41,9 @@
     }
   }
   
+  .content {
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+  }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Catigories } from './components';
+import { Header, Catigories, SortPopup } from './components';
 
 function App() {
   return (
@@ -7,8 +7,13 @@ function App() {
         <Header />
         <div className="filters">
           <Catigories />
-          {/* <SortPopup /> */}
+          <SortPopup />
         </div>
+          <div className="content">
+            <h1 className="content__title">Все пиццы</h1>
+            <div className="content__items">
+            </div>
+          </div>
     </div>
   );
 }
