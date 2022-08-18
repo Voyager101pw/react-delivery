@@ -1,9 +1,14 @@
 import React from 'react';
+import { Header, Catigories } from './components';
 
 function App() {
   return (
     <div className='App'>
-      <h1>hell</h1>
+        <Header />
+        <div className="filters">
+          <Catigories />
+          {/* <SortPopup /> */}
+        </div>
     </div>
   );
 }
