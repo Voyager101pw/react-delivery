@@ -5,49 +5,45 @@
 
   @media (max-width: 768px) {
     flex-direction: column;
+  }
 
-    &__buttons {
+  .catigories {
+    flex: 1;
+    max-width: 80%;
+    overflow: auto;
+
+    @media (max-width: 768px) {
       max-width: 100%;
     }
 
-    .catigories {
-      flex: 1;
-      max-width: 80%;
-      overflow: auto;
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
 
-      @media (max-width: 768px) {
-        max-width: 100%;
-      }
-
-      ul {
+      li {
         display: flex;
-        margin: 0;
-        padding: 0;
 
-        li {
-          display: flex;
+        width: auto;
+        height: 46px;
+        padding: 0 30px;
+        margin-right: 10px;
 
-          width: auto;
-          height: 46px;
-          padding: 0 30px;
-          margin-right: 10px;
+        box-sizing: border-box;
+        border: 0px;
+        border-radius: 30px;
 
-          box-sizing: border-box;
-          border: 0px;
-          border-radius: 30px;
+        justify-content: center;
+        align-items: center;
 
-          justify-content: center;
-          align-items: center;
+        list-style: none;
+        background-color: #F9F9F9;
+        cursor: pointer;
+        font: 700 16px 'Proxima Nova';
 
-          list-style: none;
-          background-color: #F9F9F9;
-          cursor: pointer;
-          font: 700 16px 'Proxima Nova';
-
-          &.active {
-            color: #fff;
-            background-color: #282828;
-          }
+        &.active {
+          color: #fff;
+          background-color: #282828;
         }
       }
     }
