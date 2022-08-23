@@ -1,5 +1,5 @@
 import React from 'react';
-import vector from '../assets/img/Vector.svg';
+import vector from '../../assets/img/Vector.svg';
 // import selectCurrentSort from ...
 
 function SortPopup() {

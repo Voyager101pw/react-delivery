@@ -4,10 +4,10 @@ import CartButton from './CartButton.jsx';
 
 function Header() {
   return (
-    <div className="header">
+    <>
       <Logo />
       <CartButton />
-    </div>
+    </>
   );
 }
 

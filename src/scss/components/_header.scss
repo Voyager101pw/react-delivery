@@ -3,12 +3,15 @@ body {
 }
 
 .header {
-  align-items: center;
   display: flex;
-  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
   padding: 40px 0;
-  border-bottom: 1px solid #F7F7F7;
   
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #F7F7F7;
   
   @media (max-width: 768px) {
     flex-direction: column;
