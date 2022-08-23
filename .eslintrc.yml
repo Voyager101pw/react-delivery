@@ -9,7 +9,7 @@ extends:
   - plugin:react-hooks/recommended
   - plugin:functional/recommended
   - plugin:functional/external-recommended
-  # - plugin:prettier
+  - plugin:prettier
 
 parser: "@babel/eslint-parser"
 
@@ -29,7 +29,7 @@ settings:
 plugins:
   - react
   - functional
-  # - prettier
+  - prettier
 
 rules: 
   import/extensions: 0
