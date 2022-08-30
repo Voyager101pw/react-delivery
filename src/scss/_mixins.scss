@@ -1,0 +1,27 @@
+@mixin grayBottomBorder {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+@mixin sm {
+  @media (max-width: $max-width-sm) {
+    @content
+  }
+}
+
+@mixin xs {
+  @media (max-width: $max-width-xs) {
+    @content
+  }
+}
+
+@mixin md {
+  @media (max-width: $max-width-md) {
+    @content
+  }
+}
+
+@mixin xl {
+  @media (max-width: $max-width-xl) {
+    @content
+  }
+}

@@ -1,28 +1,28 @@
 @import './fonts';
 @import './variables';
-
+@import './mixins';
 @import './libs/normalize';
-
-@import './components/all';
+@import './components/all'; // old stucture
+@import './blocks/all';
 
 body {
   background-color: $background;
 
-  @media (max-width: 768px) {
+  @include sm {
     padding: 20px 0;
   }
+}
 
-  .App {
-    width: calc(100vw - 100px);
-    max-width: 1400px;
-    margin: 40px auto;
+.App {
+  width: calc(100vw - 100px);
+  max-width: 1400px;
+  margin: 40px auto;
 
-    @media(max-width: 768px) {
-      width: calc(100vw - 50px);
-      margin: 20px auto;
-    }
-
-    background-color: #fff;
-    border-radius: 10px;
+  @include sm {
+    width: calc(100vw - 50px);
+    margin: 20px auto;
   }
+
+  background-color: #fff;
+  border-radius: 10px;
 }
