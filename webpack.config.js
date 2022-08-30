@@ -64,7 +64,11 @@ module.exports = {
         use: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
       },
       {
-        test: /\.(svg|png|jpe?g|gif)$/i,
+        test: /\.svg$/,
+        use: '@svgr/webpack',
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
         type: 'asset/resource', // модули ресурсов заменяют ранее исп.loader такие как raw,url,file-loader.
         // https://webpack.js.org/guides/asset-modules/
       },
