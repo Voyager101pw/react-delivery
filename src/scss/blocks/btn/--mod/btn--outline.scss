@@ -1,0 +1,16 @@
+.btn--outline {
+  background-color: #fff;
+  color: $orange;
+  border: 1px solid $orange;
+
+  &:hover {
+    background-color: $orange;
+    color: #fff;
+
+    svg {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+}

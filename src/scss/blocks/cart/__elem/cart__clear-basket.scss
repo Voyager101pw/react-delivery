@@ -1,0 +1,51 @@
+.cart__clear-basket {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+
+  cursor: pointer;
+  font-size: 18px;
+
+  
+  span {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  svg {
+    margin-right: 5px;
+  }
+
+
+  svg,
+  path,
+  span {
+    transition: color $duration ease-in-out, stroke $duration ease-in-out;
+    ;
+  }
+
+
+  &:hover {
+    span {
+      color: $dark;
+    }
+
+    .basket-icon path {
+      stroke: $dark;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    font-size: 5vw;
+
+    span {
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .basket-icon {
+      width: 7vw;
+      margin-right: 1vw;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.btn {
+  display: flex;
+  width: max-content;
+  height: max-content;
+  
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px 20px;
+  
+  text-align: center;
+  
+  background-color: $orange;
+  border: 0px;
+  border-radius: 50px;
+
+  cursor: pointer;
+  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  @include noselect;
+
+  &:hover {
+    background-color: darken($orange, 8%);
+  }
+
+  color: #fff;
+  span {
+    color: #fff;
+  }
+}

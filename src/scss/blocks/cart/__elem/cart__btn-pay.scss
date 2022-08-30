@@ -1,0 +1,17 @@
+.cart__btn-pay {
+  padding: 1em 1em;
+  
+  font-size: 16px;
+  font-weight: 600;
+
+  @include sm {
+    width: 30vw;
+    min-width: max-content;
+    font-size: 18px;
+  }
+
+  @include xs {
+    width: 100%;
+    padding: 15px 15px;
+  }
+}

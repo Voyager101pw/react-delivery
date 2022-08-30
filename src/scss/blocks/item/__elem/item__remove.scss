@@ -1,0 +1,13 @@
+.item__remove {
+  display: flex;
+  
+  align-items: center;
+  justify-content: flex-end;
+
+  @include sm {
+    position: absolute;
+    right: 0;
+    
+    order: 5;
+  }
+}

@@ -1,0 +1,12 @@
+.btn__cart-icon {
+  width: 16px;
+  margin-right: 8px;
+
+  @include sm {
+    width: 5vw;
+    margin-right: 1.5vw;
+
+    position: relative;
+    top: -0.2vw;
+  }
+}

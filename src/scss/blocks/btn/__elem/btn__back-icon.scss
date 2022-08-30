@@ -1,0 +1,12 @@
+.btn__back-icon {
+  width: 6px;
+  height: 12px;
+  margin-right: 8px;
+
+  @include sm {
+    margin-right: 1.5vw;
+
+    position: relative;
+    top: -0.2vw;
+  }
+}

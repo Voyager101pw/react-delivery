@@ -1,0 +1,21 @@
+.btn--circle {
+  position: relative;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+
+  min-width: 0px;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  border: 2px solid $orange;
+
+  @media (max-width: 768px) {
+    width: 9vw;
+    height: 9vw;
+  }
+}

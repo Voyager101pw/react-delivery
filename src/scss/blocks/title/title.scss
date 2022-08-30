@@ -1,0 +1,10 @@
+.title {
+  display: flex;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  @media (max-width: 768px) {
+    font-size: 8vw;
+  }
+}

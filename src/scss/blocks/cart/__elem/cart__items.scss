@@ -1,0 +1,7 @@
+.cart__items {
+  margin-bottom: 50px;
+
+  @include sm {
+    margin-bottom: 10vw;
+  }
+}

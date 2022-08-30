@@ -1,0 +1,10 @@
+.btn--positive::before {
+  font-size: 22px;
+  content: '+';
+
+  @media (max-width: 768px) {
+    position: relative;
+    top: 0.1vw;
+    font-size: 6vw;
+  }
+}

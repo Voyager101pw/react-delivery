@@ -1,0 +1,27 @@
+.item__count {
+  display: flex;
+  
+  align-items: center;
+
+  font-size: 22px;
+
+  b {
+    white-space: nowrap;
+    margin: 0 5%;
+  }
+
+  b::after {
+    content: ' шт';
+  }
+
+  @include sm {
+    width: max-content;
+    margin-top: 5vw;
+    order: 4;
+
+    b {
+      margin: 0 3vw;
+      font-size: 5vw;
+    }
+  }
+}

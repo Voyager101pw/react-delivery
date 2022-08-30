@@ -1,0 +1,35 @@
+.btn--add {
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  svg {
+    margin-right: 7px;
+  }
+
+  &:hover {
+    i {
+      background: #fff;
+      color: $orange;
+    }
+  }
+
+  i {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
+
+    color: #fff;
+    font-size: 13px;
+    line-height: 24px;
+    font-style: normal;
+
+    border: 0;
+    border-radius: 20px;
+    background: $orange;
+
+  }
+}

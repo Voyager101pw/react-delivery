@@ -1,0 +1,9 @@
+.title__icon {
+  width: 34px;
+  margin-right: 17px;
+  
+  @media (max-width: 768px) {
+    width: 7vw;
+    margin-right: 1.5vw;
+  }
+}

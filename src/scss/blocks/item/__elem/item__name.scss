@@ -1,0 +1,10 @@
+.item__name {
+  font-size: 23px;
+  margin-bottom: 5px;
+  grid-area: name-info;
+
+  @include sm {
+    font-size: 7vw;
+    margin: 0;
+  }
+}

@@ -1,0 +1,18 @@
+.cart__item {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+
+  @include grayBottomBorder;
+
+  &:last-child {
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+  }
+
+  @include sm {
+    padding-bottom: 10vw;
+    margin-bottom: 10vw;
+  }
+}
