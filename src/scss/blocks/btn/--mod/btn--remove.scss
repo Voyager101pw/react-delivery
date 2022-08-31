@@ -1,8 +1,12 @@
 .btn--remove {
   &::before {
-    content: '×'
+    content: '×';
+    position: relative;
+    top: 0.9px;
   }
 
+  font-size: 22px;
+  
   @media (max-width: 768px) {
     font-size: 6vw;
   }

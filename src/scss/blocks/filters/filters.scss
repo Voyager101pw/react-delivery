@@ -1,0 +1,9 @@
+.filters {
+  display: flex;
+  align-items: center;
+  margin: 40px 5%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}

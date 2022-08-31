@@ -1,0 +1,23 @@
+.card__content-list {
+  // style for every ul
+  display: flex;
+  cursor: pointer;
+
+  li {
+    flex: 1 1;
+    padding: 8px;
+
+    text-align: center;
+    border-radius: 5px;
+  }
+
+
+  // style only for last ul
+  &:last-child {
+    margin-top: 7px;
+
+    li::after {
+      content: ' см'
+    }
+  }
+}

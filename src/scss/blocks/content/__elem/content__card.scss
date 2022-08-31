@@ -1,0 +1,13 @@
+.content__card {
+  @include sm {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 45px;
+
+    // style for only last card
+    &:last-of-type {
+      margin: 0px;
+      padding: 0px;
+      border: 0;
+    }
+  }
+}
