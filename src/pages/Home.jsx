@@ -1,5 +1,5 @@
 import React from 'react';
-import { PizzaCard } from '../components';
+import { PizzaCard, Filters } from '../components';
 
 function Home() {
 
@@ -10,7 +10,7 @@ function Home() {
       </div>
       <div className='content'>
         <h1 className='content__title'>Все пиццы</h1>
-        <div className='content__items'>
+        <div className='content__cards'>
           <PizzaCard />
           <PizzaCard />
           <PizzaCard />

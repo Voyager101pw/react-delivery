@@ -1,5 +1,5 @@
 import React from 'react';
-import vector from '../../assets/img/Vector.svg';
+import DropIcon from '../../assets/img/drop-icon.svg';
 // import selectCurrentSort from ...
 
 function SortPopup() {
@@ -13,25 +13,23 @@ function SortPopup() {
 
   return (
     <>
-      <div className="sort">
-        <img src={vector} />
-        <b>Сортировка по:</b>
-        <span>{currentSort}</span>
+      <DropIcon className='sort__dropdown-icon'/>
+      <b>Сортировка по:</b>
+      <span>{currentSort}</span>
       {
         popupIsOpen
           ? (
-          <div className="sort__popup">
-            <ul>
-              <li className="active">популярности</li>
-              <li>цене</li>
-              <li>алфавиту</li>
-            </ul>
-          </div>
+            <div className='sort__popup'>
+              <ul className='sort__list'>
+                <li className='sort__active'>популярности</li>
+                <li>цене</li>
+                <li>алфавиту</li>
+              </ul>
+            </div>
           )
           : null
-        }
-      </div>
-  </>
+      }
+    </>
   );
 }
 
