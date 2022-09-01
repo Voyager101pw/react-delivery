@@ -1,10 +1,11 @@
 .empty-cart__icon {
-  margin-bottom: 60px;
   max-width: 300px;
+  margin: 60px 0;
 
   @include sm {
     width: 70%;
     max-width: none;
     height: auto;
+    margin: 16vw 0;
   }
 }

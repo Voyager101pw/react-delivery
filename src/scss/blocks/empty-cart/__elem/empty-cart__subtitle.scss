@@ -2,10 +2,7 @@
   line-height: 28px;
   text-align: center;
 
-  &:last-of-type {
-    margin-bottom: 60px;
-  }
-
+  
   @include sm {
     line-height: 6vw;
   }

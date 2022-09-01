@@ -2,11 +2,11 @@
   font-size: 16px;
   color: $leed;
 
-  @media (max-width: 768px) {
+  @include sm {
     font-size: 4vw;
   }
 
-  @media (max-width: 430px) {
+  @include xs {
     font-size: 3vw;
   }
 }

@@ -1,5 +1,11 @@
 .header__btn {
-  @media (max-width: 768px) {
+
+  @include sm {
+    padding: 2vw 3.5vw;
     margin-top: 30px;
+  }
+
+  @include xs {
+    margin-top: 7vw;
   }
 }

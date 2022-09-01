@@ -9,11 +9,11 @@
 
   @include grayBottomBorder;
 
-  @media (max-width: 768px) {
+  @include sm {
     flex-direction: column;
+  }
 
-    .btn--cart {
-      width: 30vw;
-    }
+  @include xs {
+    padding: 8vw 0;
   }
 }

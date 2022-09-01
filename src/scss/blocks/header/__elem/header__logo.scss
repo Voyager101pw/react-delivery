@@ -1,9 +1,10 @@
 .header__logo {
-  @media (max-width: 768px) {
+
+  @include sm {
     width: 10vw;
   }
 
-  @media (max-width: 430px) {
+  @include xs {
     width: 10vw;
   }
 }

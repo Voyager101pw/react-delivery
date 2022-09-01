@@ -6,4 +6,12 @@
 
   justify-content: center;
   align-items: center;
+
+  @include sm {
+    padding: 30px 20px;
+  }
+
+  @include xs {
+    padding: 10vw 10vw;
+  }
 }

@@ -2,11 +2,11 @@
   font-size: 26px;
   font-weight: 800;
 
-  @media (max-width: 768px) {
+  @include sm {
     font-size: 10vw;
   }
 
-  @media (max-width: 430px) {
+  @include xs {
     font-size: 6vw;
   }
 }

@@ -3,6 +3,7 @@
   font-weight: 700;
 
   @include sm {
+    padding: 2vw 3vw;
     font-size: 4vw;
   }
 }
