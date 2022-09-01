@@ -1,7 +1,7 @@
 import React from 'react';
-import CartIcon from '../assets/img/cart-icon.svg';
+import CartIcon from '../../assets/img/cart-icon.svg';
 
-function CartButton({ itmes = [], amount = 500, quantity = 5 }) {
+function CartBtn({ itmes = [], amount = 500, quantity = 5 }) {
   return (
     <button type='button' className='btn header__btn'>
       <span className='btn__price'>{`${amount} ₽`}</span>
@@ -12,4 +12,4 @@ function CartButton({ itmes = [], amount = 500, quantity = 5 }) {
   );
 }
 
-export default CartButton;
+export default CartBtn;
