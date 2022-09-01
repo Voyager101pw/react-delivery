@@ -1,0 +1,10 @@
+.empty-cart__icon {
+  margin-bottom: 60px;
+  max-width: 300px;
+
+  @include sm {
+    width: 70%;
+    max-width: none;
+    height: auto;
+  }
+}

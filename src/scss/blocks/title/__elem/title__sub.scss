@@ -1,0 +1,8 @@
+.title__sub {
+  font-size: 18px;
+  color: $leed;
+
+  @include sm {
+    font-size: 4vw;
+  }
+}
