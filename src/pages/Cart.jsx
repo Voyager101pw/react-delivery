@@ -1,31 +1,10 @@
 import React from 'react';
 
-import { Header, Filters, CartTop, CartItem, CartDetails, CartBottomButtons } from '../components';
+import { FullCart, EmptyCart } from '../components/Cart';
 
 function Cart() {
-  return (
-    <div className='cart'>
-
-      <div className='cart__top'>
-        <CartTop />
-      </div>
-
-      <div className='cart__items'>
-        <CartItem />
-        <CartItem />
-        <CartItem />
-      </div>
-
-      <div className='cart__details'>
-        <CartDetails />
-      </div>
-
-      <div className='cart__bottom-buttons'>
-        <CartBottomButtons />
-      </div>
-
-    </div>
-  );
+  const cartIsEmpty = true;
+  return cartIsEmpty ? <EmptyCart /> : <FullCart />;
 }
 
 export default Cart;

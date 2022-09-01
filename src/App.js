@@ -1,16 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Header } from './components';
-import EmptyCart from './components/Cart/EmpyCart';
 import { Home, Cart } from './pages';
+import { Header } from './components';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      {/* <Home /> */}
-      {/* <Cart /> */}
-      <EmptyCart />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Header />}>
+            <Route path='/' element={<Home />} />
+            <Route path='cart' element={<Cart />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
