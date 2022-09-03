@@ -3,14 +3,15 @@ import React from 'react';
 function CartDetails() {
   return (
     <>
-      <span>
+      <div>
         Всего пиццы:
         <b>10 шт.</b>
-      </span>
+      </div>
 
-      <span>Сумма заказа:
-        <b className='price'>1337 ₽</b>
-      </span>
+      <div>
+        Сумма заказа:
+        <b className="price">1337 ₽</b>
+      </div>
     </>
   );
 }

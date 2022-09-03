@@ -1,5 +1,5 @@
 start:
-	npm run start
+	npx concurrently --kill-others "npm run server" "npm run frontend"
 	
 prebuild:
 	npm run prebuild
@@ -12,3 +12,6 @@ install-deps:
 
 lint:
 	npx eslint . --ext js,jsx
+
+lint-fix:
+	npx eslint . --ext js,jsx --fix .

@@ -13,15 +13,15 @@ function SortPopup() {
 
   return (
     <>
-      <DropIcon className='sort__dropdown-icon'/>
+      <DropIcon className="sort__dropdown-icon" />
       <b>Сортировка по:</b>
-      <span>{currentSort}</span>
+      <div>{currentSort}</div>
       {
         popupIsOpen
           ? (
-            <div className='sort__popup'>
-              <ul className='sort__list'>
-                <li className='sort__active'>популярности</li>
+            <div className="sort__popup">
+              <ul className="sort__list">
+                <li className="sort__active">популярности</li>
                 <li>цене</li>
                 <li>алфавиту</li>
               </ul>

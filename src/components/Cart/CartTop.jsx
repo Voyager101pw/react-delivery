@@ -7,12 +7,12 @@ function CartTitle() {
   return (
     <>
       <div className="title cart__title">
-        <CartIcon className='cart-icon cart-icon--black title__icon' />
+        <CartIcon className="cart-icon cart-icon--black title__icon" />
         Корзина
       </div>
-      <div className='cart__clear-basket'>
-        <BasketIcon className='basket-icon basket-icon--gray' />
-        <span>Очистить корзину </span>
+      <div className="cart__clear-basket">
+        <BasketIcon className="basket-icon basket-icon--gray" />
+        <div>Очистить корзину </div>
       </div>
     </>
   );

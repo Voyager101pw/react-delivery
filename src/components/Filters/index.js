@@ -6,7 +6,7 @@ import SortPopup from './SortPopup.jsx';
 function Filters() {
   return (
     <>
-      <div className='catigories filters__catigories'>
+      <div className="catigories filters__catigories">
         <Catigories />
       </div>
       <div className="sort filters__sort">
