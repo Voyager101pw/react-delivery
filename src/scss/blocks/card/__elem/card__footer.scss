@@ -1,7 +1,15 @@
 .card__footer {
   display: flex;
   width: 100%;
+  flex: 1 1;
 
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 365px) {
+    display: grid;
+    grid-gap: 5vw;
+    justify-content: center;
+    text-align: center;
+  }
 }

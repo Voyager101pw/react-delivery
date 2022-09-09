@@ -5,8 +5,21 @@ import Spinner from '../components/Spinner';
 
 function Home() {
   const { data: pizzas = [] } = useGetPizzasQuery();
-  console.log(pizzas);
 
+  const renderCards = pizzas.map(({
+    id, imageUrl, price, name, sizes, types,
+  }) => (
+    <PizzaCard
+      key={id}
+      id={id}
+      imageUrl={imageUrl}
+      name={name}
+      price={price}
+      sizes={sizes}
+      types={types}
+    />
+  ));
+  console.log(pizzas);
   return (
     <>
       <div className="filters">
@@ -14,15 +27,9 @@ function Home() {
       </div>
       <div className="content">
         <h1 className="content__title">Все пиццы</h1>
-        <Spinner />
+        {/* <Spinner /> */}
         <div className="content__cards">
-          {/* <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard />
-          <PizzaCard /> */}
+          {renderCards}
         </div>
       </div>
     </>

@@ -20,4 +20,10 @@
       content: ' см'
     }
   }
+
+  @media (max-width: 340px) {
+    display:inline-block;
+    li {
+    }
+  }
 }

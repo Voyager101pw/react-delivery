@@ -1,4 +1,8 @@
 .card__price {
   font-size: 22px;
   font-weight: bold;
+
+  @media (max-width: 365px) {
+    font-size: 8vw;
+  }
 }

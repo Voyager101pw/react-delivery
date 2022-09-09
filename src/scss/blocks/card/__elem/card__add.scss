@@ -1,7 +1,5 @@
 .card__add {
 
-
-
   &::before { // небольшое нарушение бэм
     // модификация стиля btn--positiv
     margin-right: 0.7vw;
@@ -11,5 +9,10 @@
 
     font-size: 25px;
     font-weight: 900;
+  }
+
+  @media (max-width: 365px) {
+    font-size: 5vw;
+    padding: 2vw 4vw;
   }
 }

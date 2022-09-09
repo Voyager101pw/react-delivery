@@ -15,4 +15,8 @@
   @include sm {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 365px) {
+    display: block;
+  }
 }

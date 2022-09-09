@@ -1,13 +1,14 @@
 import React from 'react';
 
-import pizza from '../assets/img/pizzaCardTEST.png'; // << TEST >>
-
-function PizzaCard() {
+function PizzaCard({
+  id, imageUrl, price, name, sizes, types,
+}) {
+  console.log(imageUrl)
   return (
     <div className="card content__card">
-      <img className="card__icon" src={pizza} alt="pizza image" />
+      <img className="card__icon" src={imageUrl} alt={name} />
 
-      <div className="card__title">Пепперони Фреш с перцем</div>
+      <div className="card__title">{name}</div>
 
       <div className="card__content">
         <ul className="card__content-list">
@@ -23,8 +24,8 @@ function PizzaCard() {
       </div>
 
       <div className="card__footer">
-        <div className="card__price">от 803 ₽</div>
-        <button className="btn btn--add btn--outline btn--positive card__add">
+        <div className="card__price">{`от ${price} ₽`}</div>
+        <button type="button" className="btn btn--add btn--outline btn--positive card__add">
           Добавить
           <i>10</i>
         </button>

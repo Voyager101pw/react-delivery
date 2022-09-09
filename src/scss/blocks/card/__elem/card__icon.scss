@@ -1,0 +1,8 @@
+.card__icon {
+  width: 260px;
+  height: auto;
+
+  @include xs {
+    width: 50vw;
+  }
+}
