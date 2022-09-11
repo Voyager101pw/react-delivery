@@ -1,0 +1,11 @@
+.filters__wrapper {
+  flex: 1;
+  max-width: 80%;
+  overflow: auto;
+  margin-right: 20px;
+
+  @include sm {
+    margin: 0;
+    max-width: 100%;
+  }
+}

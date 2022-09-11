@@ -14,9 +14,9 @@ function PizzaCard({
 
   // eslint-disable-next-line max-len
   const createItems = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((availableVal, index) => {
-    const classes = cn('list__item', {
-      'list__item--active': index === indexActiveValue,
-      'list__item--disabled': !values.includes(index),
+    const classes = cn({
+      active: index === indexActiveValue,
+      disabled: !values.includes(index),
     });
     return (
       <li
@@ -42,8 +42,8 @@ function PizzaCard({
       <img className="card__icon" src={imageUrl} alt={name} />
       <div className="card__title">{name}</div>
       <div className="card__content">
-        <ul className="list card__list">{renderTypes}</ul>
-        <ul className="list card__list">{renderSizes}</ul>
+        <ul className="card__list">{renderTypes}</ul>
+        <ul className="card__list">{renderSizes}</ul>
       </div>
       <div className="card__footer">
         <div className="card__price">{`от ${price} ₽`}</div>

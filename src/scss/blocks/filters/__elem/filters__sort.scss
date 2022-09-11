@@ -1,0 +1,16 @@
+.filters__sort {
+  position: relative;
+
+  @media (max-width: 768px) {
+    margin: 30px auto;
+  }
+
+  span {
+    margin-left: 8px;
+
+    cursor: pointer;
+    color: $orange;
+    // text-decoration: underline dotted;
+    border-bottom: 1px dashed $orange;
+  }
+}
