@@ -7,7 +7,13 @@ export const apiSlice = createApi({
     getPizzas: builder.query({
       query: () => '/pizzas',
     }),
+    getAllowedValues: builder.query({
+      query: (entity) => `/allowedValues${entity}`,
+    }),
   }),
 });
 
-export const { useGetPizzasQuery } = apiSlice;
+export const {
+  useGetPizzasQuery,
+  useGetAllowedValuesQuery,
+} = apiSlice;
