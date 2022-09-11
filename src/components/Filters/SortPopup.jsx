@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
 import DropIcon from '../../assets/img/drop-icon.svg';
-// import selectCurrentSort from ...
 
-function SortPopup() {
-  // const currentSort = 'популярности';
+function SortPopup({ allowedValues }) {
+  const [indxSelectedSort, setIndexSelectedSort] = useState(0);
+  const [visiblePopup, setVisiblePopup] = useState(false);
 
-  // const currentSort = useSelector(selectCurrentSort)
-  const currentSort = 'популярности';
+  const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup);
+  const onSelectItem = (indx) => {
+    setIndexSelectedSort(indx);
+    setVisiblePopup(!visiblePopup);
+  };
 
-  // const popupIsOpen = useSelector(selectPopupStatus);
-  const popupIsOpen = true;
+  const nameCurrentSort = allowedValues[indxSelectedSort];
+  const renderSortItems = allowedValues.map((sortName, index) => (
+    <li
+      key={sortName}
+      className={cn({ active: index === indxSelectedSort })}
+      onClick={() => onSelectItem(index)}
+    >
+      {sortName}
+    </li>
+  ));
 
   return (
     <>
-      <DropIcon className="sort__dropdown-icon" />
+      <DropIcon className={cn('filters__dropdown-icon', { opened: visiblePopup })} />
       <b>Сортировка по:</b>
-      <div>{currentSort}</div>
+      <span onClick={toggleVisiblePopup}>{nameCurrentSort}</span>
       {
-        popupIsOpen
+        visiblePopup
           ? (
-            <div className="sort__popup">
-              <ul className="sort__list">
-                <li className="sort__active">популярности</li>
-                <li>цене</li>
-                <li>алфавиту</li>
+            <div className="filters__popup">
+              <ul>
+                {renderSortItems}
               </ul>
             </div>
           )
@@ -34,3 +45,11 @@ function SortPopup() {
 }
 
 export default SortPopup;
+
+SortPopup.propTypes = {
+  allowedValues: PropTypes.arrayOf(PropTypes.string),
+};
+
+SortPopup.defaultProps = {
+  allowedValues: [],
+};
