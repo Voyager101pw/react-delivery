@@ -1,25 +1,29 @@
 import React, { useEffect } from 'react';
 import { PizzaCard, Filters } from '../components';
-import { useGetPizzasQuery } from '../store/apiSlice';
+import { useGetPizzasQuery, useGetAllowedValuesQuery } from '../store/apiSlice';
 import Spinner from '../components/Spinner';
 
 function Home() {
-  const { data: pizzas = [] } = useGetPizzasQuery();
+  const { data: pizzas } = useGetPizzasQuery();
+  const { data: allowedValuesCard } = useGetAllowedValuesQuery('card');
 
-  const renderCards = pizzas.map(({
-    id, imageUrl, price, name, sizes, types,
-  }) => (
-    <PizzaCard
-      key={id}
-      id={id}
-      imageUrl={imageUrl}
-      name={name}
-      price={price}
-      sizes={sizes}
-      types={types}
-    />
-  ));
-  console.log(pizzas);
+  const renderCards = pizzas && allowedValuesCard
+    ? pizzas.map(({
+      id, imageUrl, price, name, sizes, types,
+    }) => (
+      <PizzaCard
+        key={id}
+        id={id}
+        imageUrl={imageUrl}
+        name={name}
+        price={price}
+        sizes={sizes}
+        types={types}
+        allowedValues={allowedValuesCard}
+      />
+    ))
+    : [];
+
   return (
     <>
       <div className="filters">
