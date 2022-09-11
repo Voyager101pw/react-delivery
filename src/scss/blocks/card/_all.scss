@@ -2,12 +2,12 @@
 @import './card';
 
 // === ELEMENTS ===
+@import './__elem/card__add';
 @import './__elem/card__icon';
-@import './__elem/card__content-list';
 @import './__elem/card__content';
 @import './__elem/card__content-active';
 @import './__elem/card__content-disable';
 @import './__elem/card__footer';
+@import './__elem/card__list';
 @import './__elem/card__price';
 @import './__elem/card__title';
-@import './__elem/card__add';

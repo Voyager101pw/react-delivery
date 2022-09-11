@@ -1,0 +1,12 @@
+.list {
+  display: flex;
+  
+
+  &:last-child {
+    margin-top: 7px;
+  
+    li::after {
+      content: ' см';
+    }
+  }
+}
