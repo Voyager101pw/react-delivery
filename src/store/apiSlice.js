@@ -4,6 +4,9 @@ export const apiSlice = createApi({
   reducerPath: '/api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5001/' }),
   endpoints: (builder) => ({
+    getState: builder.query({
+      query: () => '/db',
+    }),
     getPizzas: builder.query({
       query: () => '/pizzas',
     }),
@@ -24,6 +27,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+  useGetStateQuery,
   useGetPizzasQuery,
   useGetAllowedValuesQuery,
   useGetCartStateQuery,

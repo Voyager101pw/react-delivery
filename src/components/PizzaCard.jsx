@@ -16,59 +16,60 @@ function PizzaCard({
   const [addToCart, { isLoading }] = useAddToCartMutation();
 
   const { data: cartState } = useGetCartStateQuery();
-  const { pizzas, totalDue } = cartState;
+  // const { pizzas, totalDue } = cartState ?? {};
+
 
   // eslint-disable-next-line max-len
-  const createItems = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((availableVal, index) => {
-    const classes = cn({
-      active: index === indexActiveValue,
-      disabled: !values.includes(index),
-    });
-    return (
-      <li
-        key={availableVal}
-        className={classes}
-        onClick={() => handler(index)}
-      >
-        {availableVal}
-      </li>
-    );
-  });
+  // const createItems = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((availableVal, index) => {
+  //   const classes = cn({
+  //     active: index === indexActiveValue,
+  //     disabled: !values.includes(index),
+  //   });
+  //   return (
+  //     <li
+  //       key={availableVal}
+  //       className={classes}
+  //       onClick={() => handler(index)}
+  //     >
+  //       {availableVal}
+  //     </li>
+  //   );
+  // });
 
   const onSelectType = (index) => setIndexActiveType(index);
   const onSelectSize = (index) => setIndexActiveSize(index);
-  const onAddToCart = () => {
-    const pizzaIsExistInCart = pizzas.ids.includes(id);
+  // const onAddToCart = () => {
+  //   const pizzaIsExistInCart = pizzas.ids.includes(id);
 
-    if (pizzaIsExistInCart) {
+  //   if (pizzaIsExistInCart) {
       
-    } else {
-      pizzas.entities[id] = {
-        id,
-        name,
-        imageUrl,
-        type: types[indexActiveType],
-        size: sizes[indexActiveSize],
-        quantity: 1,
-        price,
-      };
-      pizzas.ids.push(id);
-      addToCart({ pizzas, totalDue: cartState.totalDue + price });
-    }
-  };
+  //   } else {
+  //     pizzas.entities[id] = {
+  //       id,
+  //       name,
+  //       imageUrl,
+  //       type: types[indexActiveType],
+  //       size: sizes[indexActiveSize],
+  //       quantity: 1,
+  //       price,
+  //     };
+  //     pizzas.ids.push(id);
+  //     addToCart({ pizzas, totalDue: cartState.totalDue + price });
+  //   }
+  // };
 
-  const [renderTypes, renderSizes] = [
-    [allowedTypes, indexActiveType, types, onSelectType],
-    [allowedSizes, indexActiveSize, sizes, onSelectSize],
-  ].map(createItems);
+  // const [renderTypes, renderSizes] = [
+  //   [allowedTypes, indexActiveType, types, onSelectType],
+  //   [allowedSizes, indexActiveSize, sizes, onSelectSize],
+  // ].map(createItems);
 
   return (
     <div className="card content__card">
       <img className="card__icon" src={imageUrl} alt={name} />
       <div className="card__title">{name}</div>
       <div className="card__content">
-        <ul className="card__list">{renderTypes}</ul>
-        <ul className="card__list">{renderSizes}</ul>
+        {/* <ul className="card__list">{renderTypes}</ul>
+        <ul className="card__list">{renderSizes}</ul> */}
       </div>
       <div className="card__footer">
         <div className="card__price">{`от ${price} ₽`}</div>
