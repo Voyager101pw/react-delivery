@@ -1,28 +1,25 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import { PizzaCard, Filters } from '../components';
 import { useGetPizzasQuery, useGetAllowedValuesQuery } from '../store/apiSlice';
 import Spinner from '../components/Spinner';
 
 function Home() {
-  const { data: pizzas } = useGetPizzasQuery();
-  const { data: allowedValuesCard } = useGetAllowedValuesQuery('card');
+  const { data: pizzas, isLoading: pizzasIsLoading } = useGetPizzasQuery();
+  const { data: allowedValuesCard, isLoading: valuesIsLoading } = useGetAllowedValuesQuery('card');
 
-  const renderCards = pizzas && allowedValuesCard
-    ? pizzas.map(({
-      id, imageUrl, price, name, sizes, types,
-    }) => (
-      <PizzaCard
-        key={id}
-        id={id}
-        imageUrl={imageUrl}
-        name={name}
-        price={price}
-        sizes={sizes}
-        types={types}
-        allowedValues={allowedValuesCard}
-      />
-    ))
-    : [];
+  const renderCards = () => pizzas.map((props) => (
+    <PizzaCard
+      key={props.id}
+      {...props} // { id, imageUrl, price, name, sizes, types }
+      allowedValues={allowedValuesCard}
+    />
+  ));
+
+  const content = pizzasIsLoading || valuesIsLoading
+    ? <Spinner />
+    : <div className="content__cards">{renderCards()}</div>;
 
   return (
     <>
@@ -31,10 +28,7 @@ function Home() {
       </div>
       <div className="content">
         <h1 className="content__title">Все пиццы</h1>
-        {/* <Spinner /> */}
-        <div className="content__cards">
-          {renderCards}
-        </div>
+        {content}
       </div>
     </>
   );
