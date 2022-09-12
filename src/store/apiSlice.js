@@ -10,10 +10,22 @@ export const apiSlice = createApi({
     getAllowedValues: builder.query({
       query: (entity) => `/allowedValues${entity}`,
     }),
+    getCartState: builder.query({
+      query: () => '/cart',
+    }),
+    addToCart: builder.mutation({
+      query: (body) => ({
+        url: '/cart',
+        method: 'UPDATE',
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetPizzasQuery,
   useGetAllowedValuesQuery,
+  useGetCartStateQuery,
+  useAddToCartMutation,
 } = apiSlice;

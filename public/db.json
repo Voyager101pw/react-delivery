@@ -103,11 +103,10 @@
   ],
   "cart": {
     "pizzas": {
-      "entity": [],
+      "entities": [],
       "ids": []
     },
-    "price": 0,
-    "count": 0
+    "totalDue": 0
   },
   "allowedValuesCard": {
     "types": ["тонкая", "традиционная", "итальянская"],

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { useAddToCartMutation, useGetCartStateQuery } from '../store/apiSlice';
 
 function PizzaCard({
   id, imageUrl, price, name,
@@ -11,6 +12,11 @@ function PizzaCard({
   const { types: allowedTypes, sizes: allowedSizes } = allowedValues;
   const [indexActiveType, setIndexActiveType] = useState(types[0]);
   const [indexActiveSize, setIndexActiveSize] = useState(sizes[0]);
+
+  const [addToCart, { isLoading }] = useAddToCartMutation();
+
+  const { data: cartState } = useGetCartStateQuery();
+  const { pizzas, totalDue } = cartState;
 
   // eslint-disable-next-line max-len
   const createItems = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((availableVal, index) => {
@@ -31,6 +37,25 @@ function PizzaCard({
 
   const onSelectType = (index) => setIndexActiveType(index);
   const onSelectSize = (index) => setIndexActiveSize(index);
+  const onAddToCart = () => {
+    const pizzaIsExistInCart = pizzas.ids.includes(id);
+
+    if (pizzaIsExistInCart) {
+      
+    } else {
+      pizzas.entities[id] = {
+        id,
+        name,
+        imageUrl,
+        type: types[indexActiveType],
+        size: sizes[indexActiveSize],
+        quantity: 1,
+        price,
+      };
+      pizzas.ids.push(id);
+      addToCart({ pizzas, totalDue: cartState.totalDue + price });
+    }
+  };
 
   const [renderTypes, renderSizes] = [
     [allowedTypes, indexActiveType, types, onSelectType],
