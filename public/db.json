@@ -103,7 +103,7 @@
   ],
   "cart": [],
   "totalDue": {
-    "n": 0
+    "totalDue": 0
   },
   "allowedValuesCard": {
     "allowedTypes": ["тонкая", "традиционная", "итальянская"],

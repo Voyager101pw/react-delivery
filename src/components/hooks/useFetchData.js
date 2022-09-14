@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  apiSlice,
   useGetPizzasQuery,
   useGetTotalDueQuery,
   useGetCartQuery,
@@ -8,14 +7,12 @@ import {
 } from '../../store/apiSlice';
 
 const useFetchData = () => {
-  const { data: x } = apiSlice.endpoints.getTotalDue.initiate();
-  console.log(x);
   const { data: pizzas, isLoading: pizzasIsLoading } = useGetPizzasQuery();
   const { data: allowedValuesCard, isLoading: valuesIsLoading } = useGetAllowedValuesQuery('card');
   const { data: cart, isLoading: cartIsLoading } = useGetCartQuery();
-  const { data: { totalDue }, isLoading: totalDueIsLoading } = useGetTotalDueQuery();
+  const { data: totalDue, isLoading: totalDueIsLoading } = useGetTotalDueQuery();
 
-  const fetchedData = React.useState(() => {
+  const fetchedData = React.useMemo(() => {
     const isLoading = pizzasIsLoading || valuesIsLoading || cartIsLoading || totalDueIsLoading;
     const data = {
       isLoading,
@@ -23,7 +20,7 @@ const useFetchData = () => {
         pizzas: pizzas ?? [],
         allowedValuesCard: allowedValuesCard ?? {},
         cart: cart ?? [],
-        totalDue: totalDue ?? 0,
+        totalDue: totalDue?.totalDue ?? 0,
       },
     };
     return data;

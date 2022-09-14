@@ -7,25 +7,26 @@ import { useAddToCartMutation, useEditTotalDueMutation } from '../store/apiSlice
 import Spinner from '../components/Spinner';
 
 function Home() {
-  const { data: { pizzas = [] }, isLoading } = useFetchData();
-  const [addToCart] = useAddToCartMutation();
-  const [editTotalDue] = useEditTotalDueMutation();
+  const { data, isLoading } = useFetchData();
+  console.log(data)
+  // const [addToCart] = useAddToCartMutation();
+  // const [editTotalDue] = useEditTotalDueMutation();
 
-  const renderCards = () => pizzas.map((props) => <PizzaCard {...props} key={props.id} addToCart={addToCart} editTotalDue={editTotalDue} />);
+  // const renderCards = () => pizzas.map((props) => <PizzaCard {...props} key={props.id} addToCart={addToCart} editTotalDue={editTotalDue} />);
 
-  const content = isLoading
-    ? <Spinner />
-    : <div className="content__cards">{ renderCards() }</div>;
+  // const content = isLoading
+  //   ? <Spinner />
+  //   : <div className="content__cards">{ renderCards() }</div>;
 
   return (
     <>
-      <div className="filters">
+      {/* <div className="filters">
         <Filters />
       </div>
       <div className="content">
         <h1 className="content__title">Все пиццы</h1>
         {content}
-      </div>
+      </div> */}
     </>
   );
 }
