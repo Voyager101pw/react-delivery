@@ -2,31 +2,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PizzaCard, Filters } from '../components';
-import {
-  useGetPizzasQuery, useGetAllowedValuesQuery,
-  useGetCartStateQuery, useAddToCartMutation,
-} from '../store/apiSlice';
+import useFetchData from '../components/hooks/useFetchData';
+import { useAddToCartMutation, useEditTotalDueMutation } from '../store/apiSlice';
 import Spinner from '../components/Spinner';
 
 function Home() {
-  const { data: pizzas, isLoading: pizzasIsLoading } = useGetPizzasQuery();
-  const { data: allowedValuesCard, isLoading: valuesIsLoading } = useGetAllowedValuesQuery('card');
-  const { data: cartState = {}, isLoading: cartStateIsLoading } = useGetCartStateQuery();
+  const { data: { pizzas = [] }, isLoading } = useFetchData();
   const [addToCart] = useAddToCartMutation();
+  const [editTotalDue] = useEditTotalDueMutation();
 
-  const renderCards = () => pizzas.map((props) => (
-    <PizzaCard
-      key={props.id}
-      {...props} // { id, imageUrl, price, name, sizes, types }
-      allowedValues={allowedValuesCard}
-      addToCart={addToCart}
-      cartState={cartState}
-    />
-  ));
+  const renderCards = () => pizzas.map((props) => <PizzaCard {...props} key={props.id} addToCart={addToCart} editTotalDue={editTotalDue} />);
 
-  const content = pizzasIsLoading || valuesIsLoading || cartStateIsLoading
+  const content = isLoading
     ? <Spinner />
-    : <div className="content__cards">{renderCards()}</div>;
+    : <div className="content__cards">{ renderCards() }</div>;
 
   return (
     <>

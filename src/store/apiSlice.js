@@ -12,15 +12,24 @@ export const apiSlice = createApi({
     getAllowedValues: builder.query({
       query: (entity) => `/allowedValues${entity}`,
     }),
-    getCartState: builder.query({
+    getCart: builder.query({
       query: () => '/cart',
-      providesTags: () => [{ type: 'getCart' }],
+    }),
+    getTotalDue: builder.query({
+      query: () => '/totalDue',
+    }),
+    editTotalDue: builder.mutation({
+      query: (newTotalDue) => ({
+        url: '/totalDue',
+        method: 'POST',
+        body: newTotalDue,
+      }),
     }),
     addToCart: builder.mutation({
-      query: (body) => ({
-        url: '/cart',
+      query: (product) => ({
+        url: `/cart/${product.id}`,
         method: 'POST',
-        body,
+        body: product,
       }),
       invalidatesTags: () => [{ type: 'getCart' }],
     }),
@@ -29,7 +38,9 @@ export const apiSlice = createApi({
 
 export const {
   useGetPizzasQuery,
+  useGetCartQuery,
+  useGetTotalDueQuery,
+  useEditTotalDueMutation,
   useGetAllowedValuesQuery,
-  useGetCartStateQuery,
   useAddToCartMutation,
 } = apiSlice;

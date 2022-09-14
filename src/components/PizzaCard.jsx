@@ -1,33 +1,32 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import useFetchData from './hooks/useFetchData';
 
 function PizzaCard({
   id, imageUrl, price, name,
-  sizes, types, allowedValues,
-  addToCart, cartState,
+  sizes, types, addToCart, editTotalDue,
 }) {
   const [indexActiveType, setIndexActiveType] = useState(types[0]);
   const [indexActiveSize, setIndexActiveSize] = useState(sizes[0]);
 
-  const { types: allowedTypes, sizes: allowedSizes } = allowedValues;
-  const { pizzas, totalDue } = cartState;
+  const { data: { cart, totalDue, allowedValuesCard } } = useFetchData();
+  const { allowedTypes, allowedSizes } = allowedValuesCard;
+  const type = allowedTypes[indexActiveType];
+  const size = allowedSizes[indexActiveSize];
 
-  // eslint-disable-next-line max-len
-  const createItems = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((availableVal, index) => {
+  const createLi = ([availableVals, indexActiveValue, values, handler]) => availableVals.map((value, index) => {
     const classes = cn({
       active: index === indexActiveValue,
       disabled: !values.includes(index),
     });
     return (
       <li
-        key={availableVal}
+        key={value}
         className={classes}
         onClick={() => handler(index)}
       >
-        {availableVal}
+        {value}
       </li>
     );
   });
@@ -35,50 +34,31 @@ function PizzaCard({
   const onSelectType = (index) => setIndexActiveType(index);
   const onSelectSize = (index) => setIndexActiveSize(index);
   const onAddToCart = () => {
-    const type = allowedTypes[indexActiveType];
-    const size = allowedSizes[indexActiveSize];
-    const pizzaIsExistInCart = pizzas.ids.includes(id + type + size);
-    if (pizzaIsExistInCart) {
+    const currentId = id + type + size;
+    const product = cart.filter(({ idProductInCart }) => idProductInCart === currentId)[0];
+    if (product) {
       addToCart({
-        pizzas: {
-          ...pizzas,
-          entities: {
-            ...pizzas.entities,
-            [id + type + size]: {
-              ...pizzas.entities[id + type + size],
-              quantity: pizzas.entities[id + type + size].quantity + 1,
-            },
-          },
-        },
-        totalDue: totalDue + price,
+        ...product,
+        quantity: product.quantity + 1,
       });
     } else {
       addToCart({
-        pizzas: {
-          ...pizzas,
-          entities: {
-            ...pizzas.entities,
-            [id + type + size]: {
-              id: id + type + size,
-              name,
-              type,
-              size,
-              imageUrl,
-              quantity: 1,
-              price,
-            },
-          },
-          ids: [...pizzas.ids, id + type + size],
-        },
-        totalDue: totalDue + price,
+        id: currentId,
+        name,
+        size,
+        type,
+        imageUrl,
+        price,
+        quantity: 1,
       });
     }
+    editTotalDue(totalDue + price);
   };
 
   const [renderTypes, renderSizes] = [
     [allowedTypes, indexActiveType, types, onSelectType],
     [allowedSizes, indexActiveSize, sizes, onSelectSize],
-  ].map(createItems);
+  ].map(createLi);
 
   return (
     <div className="card content__card">
@@ -110,18 +90,8 @@ PizzaCard.propTypes = {
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   price: PropTypes.number.isRequired,
-  allowedValues: PropTypes.shape({
-    types: PropTypes.arrayOf(PropTypes.string),
-    sizes: PropTypes.arrayOf(PropTypes.number),
-  }).isRequired,
   addToCart: PropTypes.func.isRequired,
-  cartState: PropTypes.shape({
-    pizzas: PropTypes.shape({
-      entities: PropTypes.object,
-      ids: PropTypes.arrayOf(PropTypes.string),
-    }),
-    totalDue: PropTypes.number,
-  }).isRequired,
+  editTotalDue: PropTypes.func.isRequired,
 };
 
 export default PizzaCard;
