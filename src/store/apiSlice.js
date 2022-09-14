@@ -3,10 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: '/api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5001/' }),
+  tagTypes: ['getCart'],
+
   endpoints: (builder) => ({
-    getState: builder.query({
-      query: () => '/db',
-    }),
     getPizzas: builder.query({
       query: () => '/pizzas',
     }),
@@ -15,19 +14,20 @@ export const apiSlice = createApi({
     }),
     getCartState: builder.query({
       query: () => '/cart',
+      providesTags: () => [{ type: 'getCart' }],
     }),
     addToCart: builder.mutation({
       query: (body) => ({
         url: '/cart',
-        method: 'UPDATE',
+        method: 'POST',
         body,
       }),
+      invalidatesTags: () => [{ type: 'getCart' }],
     }),
   }),
 });
 
 export const {
-  useGetStateQuery,
   useGetPizzasQuery,
   useGetAllowedValuesQuery,
   useGetCartStateQuery,
