@@ -101,23 +101,38 @@
       "rating": 7
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "итальянская305",
+      "name": "Крэйзи пепперони",
+      "size": 30,
+      "type": "итальянская",
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/1e1a6e80-b3ba-4a44-b6b9-beae5b1fbf27.jpg",
+      "price": 580,
+      "quantity": 1
+    },
+    {
+      "id": "итальянская405",
+      "name": "Крэйзи пепперони",
+      "size": 40,
+      "type": "итальянская",
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/1e1a6e80-b3ba-4a44-b6b9-beae5b1fbf27.jpg",
+      "price": 580,
+      "quantity": 2
+    }
+  ],
   "totalDue": {
-    "totalDue": 0
+    "ammout": 0
   },
-  "allowedValuesCard": {
-    "allowedTypes": ["тонкая", "традиционная", "итальянская"],
-    "allowedSizes": [26, 30, 40]
-  },
-  "allowedValuesFilters": {
-    "categories": [
-      "Все",
-      "Мясные",
-      "Вегетарианские",
-      "Гриль",
-      "Острые",
-      "Закрытые"
-    ],
-    "sort": ["популярности", "цене", "алфавиту"]
-  }
+  "allowedSizes": [26, 30, 40],
+  "allowedTypes": ["тонкая", "традиционная", "итальянская"],
+  "allowedCategories": [
+    "Все",
+    "Мясные",
+    "Вегетарианские",
+    "Гриль",
+    "Острые",
+    "Закрытые"
+  ],
+  "allowedSort": ["популярности", "цене", "алфавиту"]
 }

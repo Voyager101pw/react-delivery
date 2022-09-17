@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { useGetAllowedValuesQuery } from '../../store/apiSlice';
 
-function Catigories({ allowedValues }) {
-  const [activeCategory, setActiveCategory] = useState(0);
+function Categories() {
+  const [indexActiveCategory, setIndexActiveCategory] = useState(0);
+  const { data: categories = [] } = useGetAllowedValuesQuery('categories');
 
-  const renderCategories = allowedValues.map((category, index) => (
+  const content = categories.map((category, index) => (
     <li
       key={category}
-      className={cn({ active: index === activeCategory })}
-      onClick={() => setActiveCategory(index)}
+      className={cn({ active: index === indexActiveCategory })}
+      onClick={() => setIndexActiveCategory(index)}
     >
       {category}
     </li>
@@ -17,17 +18,9 @@ function Catigories({ allowedValues }) {
 
   return (
     <ul className="filters__categories">
-      {renderCategories}
+      {content}
     </ul>
   );
 }
 
-export default Catigories;
-
-Catigories.propTypes = {
-  allowedValues: PropTypes.arrayOf(PropTypes.string),
-};
-
-Catigories.defaultProps = {
-  allowedValues: ['Все'],
-};
+export default Categories;

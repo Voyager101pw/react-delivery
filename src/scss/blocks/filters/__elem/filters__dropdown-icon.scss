@@ -1,9 +1,13 @@
 .filters__dropdown-icon {
   margin-right: 8px;
-
+  
+  position: relative;
+  bottom: 1px;
+  
   transform: rotate(180deg);
 
   &.opened {
     transform: rotate(0deg);
+    bottom: 3px;
   }
 }

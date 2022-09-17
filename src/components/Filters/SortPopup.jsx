@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import DropIcon from '../../assets/img/drop-icon.svg';
+import { useGetAllowedValuesQuery } from '../../store/apiSlice';
 
-function SortPopup({ allowedValues }) {
+function SortPopup() {
   const [indxSelectedSort, setIndexSelectedSort] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(false);
+  const { data: sort = [] } = useGetAllowedValuesQuery('sort');
 
   const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup);
   const onSelectItem = (indx) => {
@@ -13,8 +14,8 @@ function SortPopup({ allowedValues }) {
     setVisiblePopup(!visiblePopup);
   };
 
-  const nameCurrentSort = allowedValues[indxSelectedSort];
-  const renderSortItems = allowedValues.map((sortName, index) => (
+  const nameCurrentSort = sort[indxSelectedSort];
+  const renderSortItems = sort.map((sortName, index) => (
     <li
       key={sortName}
       className={cn({ active: index === indxSelectedSort })}
@@ -45,11 +46,3 @@ function SortPopup({ allowedValues }) {
 }
 
 export default SortPopup;
-
-SortPopup.propTypes = {
-  allowedValues: PropTypes.arrayOf(PropTypes.string),
-};
-
-SortPopup.defaultProps = {
-  allowedValues: [],
-};
