@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: '/api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5001/' }),
-  tagTypes: ['getCart', 'getTotalDue'],
+  tagTypes: ['getCart', 'getCartInfo'],
 
   endpoints: (builder) => ({
     getPizza: builder.query({
@@ -20,19 +20,19 @@ export const apiSlice = createApi({
       ],
     }),
     getAllowedValues: builder.query({
-      query: (typeValues) => `/allowed${typeValues}`,
+      query: (nameValues) => `/allowed${nameValues}`,
     }),
-    getTotalDue: builder.query({
-      query: () => '/totalDue',
-      providesTags: () => [{ type: 'getTotalDue' }],
+    getCartInfo: builder.query({
+      query: () => '/cartInfo',
+      providesTags: ['getCartInfo'],
     }),
-    updateTotalDue: builder.mutation({
-      query: (newTotalDue) => ({
-        url: '/totalDue',
-        method: 'PATCH',
-        body: newTotalDue,
+    updateCartInfo: builder.mutation({
+      query: (newInfo) => ({
+        url: '/cartInfo',
+        method: 'POST',
+        body: newInfo,
       }),
-      invalidatesTags: () => [{ type: 'getTotalDue' }],
+      invalidatesTags: () => [{ type: 'getCartInfo' }],
     }),
     addToCart: builder.mutation({
       query: (pizza) => ({
@@ -59,6 +59,6 @@ export const {
   useGetCartQuery,
   useAddToCartMutation,
   useIncrementAmountMutation,
-  useGetTotalDueQuery,
-  useUpdateTotalDueMutation,
+  useGetCartInfoQuery,
+  useUpdateCartInfoMutation,
 } = apiSlice;
