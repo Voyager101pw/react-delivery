@@ -6,9 +6,15 @@ import { store } from './store';
 import App from './App';
 
 import './scss/app.scss';
+import { fetchCategories, fetchSort } from './store/filtersSlice';
+
 // import reportWebVitals from './reportWebVitals.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+store.dispatch(fetchCategories());
+store.dispatch(fetchSort());
+
 root.render(
   <Provider store={store}>
     <App />

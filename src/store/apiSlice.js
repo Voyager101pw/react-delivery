@@ -62,3 +62,8 @@ export const {
   useGetCartInfoQuery,
   useUpdateCartInfoMutation,
 } = apiSlice;
+
+// api for lib "json-server":
+// Выборка: https://github.com/typicode/json-server#filter
+// Разбритие на страницы (лимит): https://github.com/typicode/json-server#paginate
+// Сортировка: https://github.com/typicode/json-server#paginate

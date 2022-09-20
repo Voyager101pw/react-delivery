@@ -10,7 +10,9 @@ function Categories() {
     <li
       key={category}
       className={cn({ active: index === indexActiveCategory })}
-      onClick={() => setIndexActiveCategory(index)}
+      onClick={() => {
+        setIndexActiveCategory(index);
+      }}
     >
       {category}
     </li>
