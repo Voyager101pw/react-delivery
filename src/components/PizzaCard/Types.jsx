@@ -1,7 +1,7 @@
-import { useGetAllowedValuesQuery } from '../../store/apiSlice';
+import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function Types({ createMenuButtons }) {
-  const { data: allowedTypes = [] } = useGetAllowedValuesQuery('types');
+  const allowedTypes = useSelectAllowedValues('types');
   const menuButtons = createMenuButtons({
     menuFor: 'types',
     allowedValues: allowedTypes,

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import DropIcon from '../../assets/img/drop-icon.svg';
-import { useGetAllowedValuesQuery } from '../../store/apiSlice';
+import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function SortPopup() {
   const [indxSelectedSort, setIndexSelectedSort] = useState(0);
   const [visiblePopup, setVisiblePopup] = useState(false);
-  const { data: sort = [] } = useGetAllowedValuesQuery('sort');
+  const sort = useSelectAllowedValues('sort');
 
   const toggleVisiblePopup = () => setVisiblePopup(!visiblePopup);
   const onSelectItem = (indx) => {

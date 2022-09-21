@@ -1,9 +1,10 @@
 import React from 'react';
 import CartIcon from '../../assets/img/cart-icon.svg';
-import { useGetCartInfoQuery } from '../../store/apiSlice';
+import { useGetCartQuery } from '../../store/apiSlice';
 
 function CartBtn() {
-  const { data: { totalDue = 0, amountPizzas = 0 } = {} } = useGetCartInfoQuery();
+  const { data: cart = {} } = useGetCartQuery();
+  const { totalDue = 0, amountPizzas = 0 } = cart;
   return (
     <button type="button" className="btn header__btn">
       <div className="btn__price">{`${totalDue} ₽`}</div>

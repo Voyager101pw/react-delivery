@@ -14,17 +14,10 @@ export const apiSlice = createApi({
     }),
     getCart: builder.query({
       query: () => '/cart',
-      providesTags: (res = []) => [
-        'getCart',
-        ...res.map((pizza) => ({ type: 'getCart', id: pizza.id })),
-      ],
-    }),
-    getAllowedValues: builder.query({
-      query: (nameValues) => `/allowed${nameValues}`,
-    }),
-    getCartInfo: builder.query({
-      query: () => '/cartInfo',
-      providesTags: ['getCartInfo'],
+      // providesTags: (res = []) => [
+      //   'getCart',
+      //   ...res.map((pizza) => ({ type: 'getCart', id: pizza.id })),
+      // ],
     }),
     updateCartInfo: builder.mutation({
       query: (newInfo) => ({
@@ -54,12 +47,10 @@ export const apiSlice = createApi({
 });
 
 export const {
-  useGetAllowedValuesQuery,
   useGetPizzasQuery,
   useGetCartQuery,
   useAddToCartMutation,
   useIncrementAmountMutation,
-  useGetCartInfoQuery,
   useUpdateCartInfoMutation,
 } = apiSlice;
 

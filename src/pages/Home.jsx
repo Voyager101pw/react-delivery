@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PizzaCard, Filters } from '../components';
-import { useGetPizzasQuery, apiSlice } from '../store/apiSlice';
+import { useGetPizzasQuery } from '../store/apiSlice';
 import Spinner from '../components/Spinner';
 
 function Home() {

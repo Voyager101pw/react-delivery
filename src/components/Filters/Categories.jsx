@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import { useGetAllowedValuesQuery } from '../../store/apiSlice';
+import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function Categories() {
   const [indexActiveCategory, setIndexActiveCategory] = useState(0);
-  const { data: categories = [] } = useGetAllowedValuesQuery('categories');
-
+  const categories = useSelectAllowedValues('categories');
   const content = categories.map((category, index) => (
     <li
       key={category}

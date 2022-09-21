@@ -6,14 +6,13 @@ import { store } from './store';
 import App from './App';
 
 import './scss/app.scss';
-import { fetchCategories, fetchSort } from './store/filtersSlice';
+import { fetchData } from './store/allowedValuesSlice';
 
 // import reportWebVitals from './reportWebVitals.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-store.dispatch(fetchCategories());
-store.dispatch(fetchSort());
+store.dispatch(fetchData());
 
 root.render(
   <Provider store={store}>
