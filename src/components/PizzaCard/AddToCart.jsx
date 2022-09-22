@@ -8,40 +8,45 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
     id, imageUrl, price, name, sizes, types,
   } = pizzaProps;
   const [allowedTypes, allowedSizes] = useSelectAllowedValues('types', 'sizes');
-  const { data: cart = {} } = apiSlice.useGetCartQuery();
+  const [addToCart] = apiSlice.useAddToCartMutation();
+  const { data: cart } = apiSlice.useGetCartQuery();
   const { cartItems, totalDue, amountPizzas } = cart;
-
 
   const nameSelectedType = allowedTypes[indexActiveType];
   const nameSelectedSize = allowedSizes[indexActiveSize];
   const extendedId = nameSelectedType + nameSelectedSize + id;
-
-  const [addToCart] = apiSlice.useAddToCartMutation();
-  const [updateCartInfo] = apiSlice.useUpdateCartInfoMutation();
-  const [incrementAmount] = apiSlice.useIncrementAmountMutation();
+  const idSearchedPizza = extendedId;
 
   const pizzaIsExistInCart = () => {
-    const idSearchedPizza = extendedId;
     const pizza = cartItems.filter(({ id: idPizzaInCart }) => idPizzaInCart === idSearchedPizza)[0];
-    return {
-      isExist: Boolean(pizza),
-      pizza,
-    };
+    return Boolean(pizza);
   };
+
   const handlerAddToCart = () => {
-    const { isExist, pizza } = pizzaIsExistInCart();
-    isExist
-      ? incrementAmount({ ...pizza, amount: pizza.amount + 1 })
-      : addToCart({
-        id: extendedId,
-        name,
-        type: nameSelectedType,
-        size: nameSelectedSize,
-        imageUrl,
-        price,
-        amount: 1,
-      });
-    updateCartInfo({
+    let updatedCartItems = null;
+
+    if (pizzaIsExistInCart()) {
+      updatedCartItems = cartItems.map((cartItem) => (cartItem.id === idSearchedPizza
+        ? ({ ...cartItem, amount: cartItem.amount + 1 })
+        : cartItem
+      ));
+    } else {
+      updatedCartItems = [
+        ...cartItems,
+        {
+          id: extendedId,
+          name,
+          type: nameSelectedType,
+          size: nameSelectedSize,
+          imageUrl,
+          price,
+          amount: 1,
+        },
+      ];
+    }
+
+    addToCart({
+      cartItems: updatedCartItems,
       totalDue: totalDue + price,
       amountPizzas: amountPizzas + 1,
     });

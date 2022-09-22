@@ -14,18 +14,7 @@ export const apiSlice = createApi({
     }),
     getCart: builder.query({
       query: () => '/cart',
-      // providesTags: (res = []) => [
-      //   'getCart',
-      //   ...res.map((pizza) => ({ type: 'getCart', id: pizza.id })),
-      // ],
-    }),
-    updateCartInfo: builder.mutation({
-      query: (newInfo) => ({
-        url: '/cartInfo',
-        method: 'POST',
-        body: newInfo,
-      }),
-      invalidatesTags: () => [{ type: 'getCartInfo' }],
+      providesTags: ['getCart'],
     }),
     addToCart: builder.mutation({
       query: (pizza) => ({
@@ -35,14 +24,6 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: () => [{ type: 'getCart' }],
     }),
-    incrementAmount: builder.mutation({
-      query: (pizza) => ({
-        url: `cart/${pizza.id}`,
-        method: 'PATCH',
-        body: pizza,
-      }),
-      invalidatesTags: (res, err, arg) => [{ type: 'getCart', id: arg.id }],
-    }),
   }),
 });
 
@@ -50,8 +31,6 @@ export const {
   useGetPizzasQuery,
   useGetCartQuery,
   useAddToCartMutation,
-  useIncrementAmountMutation,
-  useUpdateCartInfoMutation,
 } = apiSlice;
 
 // api for lib "json-server":

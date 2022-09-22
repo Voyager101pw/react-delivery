@@ -1,16 +1,20 @@
 import React from 'react';
+import { useGetCartQuery } from '../../store/apiSlice';
 
 function CartDetails() {
+  const { data: cart = {} } = useGetCartQuery();
+  const { totalDue = 0, amountPizzas = 0 } = cart;
+
   return (
     <>
       <div>
         Всего пиццы:
-        <b>10 шт.</b>
+        <b>{`${amountPizzas} шт`}</b>
       </div>
 
       <div>
         Сумма заказа:
-        <b className="price">1337 ₽</b>
+        <b className="price">{`${totalDue} ₽`}</b>
       </div>
     </>
   );

@@ -32,7 +32,6 @@ function PizzaCard(props) {
       </li>
     );
   });
-
   const priceLabel = `от ${price} ₽`;
   return (
     <div className="card content__card">
