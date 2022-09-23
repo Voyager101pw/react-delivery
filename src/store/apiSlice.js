@@ -10,7 +10,7 @@ export const apiSlice = createApi({
       query: (id) => `/pizzas/${id}`,
     }),
     getPizzas: builder.query({
-      query: () => '/pizzas',
+      query: (queryString) => (queryString ? `/pizzas?${queryString}` : '/pizzas'),
     }),
     getCart: builder.query({
       query: () => '/cart',

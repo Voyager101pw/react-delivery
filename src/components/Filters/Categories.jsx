@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
-import { toggleCategory } from '../../store/filterModSlice';
+import { toggleCategory } from '../../store/filtersSlice';
 import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function Categories() {
+  const dispatch = useDispatch();
   const [indexActiveCategory, setIndexActiveCategory] = useState(0);
   const categories = useSelectAllowedValues('categories');
-  const dispatch = useDispatch();
   const content = categories.map((category, index) => (
     <li
       key={category}

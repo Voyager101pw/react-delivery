@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import allowedValuesReducer from './allowedValuesSlice';
-import filterModReducer from './filterModSlice';
+import filterModReducer from './filtersSlice';
 import { apiSlice } from './apiSlice';
 
 export const store = configureStore({
   reducer: {
     allowedValues: allowedValuesReducer,
-    filterMod: filterModReducer,
+    filters: filterModReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),

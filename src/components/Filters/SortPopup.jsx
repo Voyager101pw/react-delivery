@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { useDispatch } from 'react-redux';
-import { toggleSort } from '../../store/filterModSlice.js';
+import { toggleSort } from '../../store/filtersSlice';
 import DropIcon from '../../assets/img/drop-icon.svg';
 import { useSelectAllowedValues } from '../../hooks/useSelect';
 
