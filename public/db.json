@@ -163,9 +163,19 @@
     }
   ],
   "cart": {
-    "cartItems": [],
-    "totalDue": 0,
-    "amountPizzas": 0
+    "cartItems": [
+      {
+        "id": "тонкая267",
+        "name": "Маргарита",
+        "type": "тонкая",
+        "size": 26,
+        "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d48003cd-902c-420d-9f28-92d9dc5f73b4.jpg",
+        "price": 450,
+        "amount": 1
+      }
+    ],
+    "totalDue": 450,
+    "amountPizzas": 1
   },
   "allowedValues": {
     "sizes": [
@@ -187,9 +197,12 @@
       "Закрытые"
     ],
     "sort": [
-      "популярности",
-      "цене",
-      "алфавиту"
+      "популярности (DESC)",
+      "популярности (ASC)",
+      "цене (DESC)",
+      "цене (ASC)",
+      "алфавиту (DESC)",
+      "алфавиту (ASC)"
     ]
   }
 }

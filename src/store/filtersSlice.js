@@ -13,15 +13,27 @@ const filtersSlice = createSlice({
     toggleSort: (state, { payload: numberSort }) => {
       switch (numberSort) {
         case 0: {
-          state.sortFilter = '';
+          state.sortFilter = '_sort=rating&_order=desc';
           break;
         }
         case 1: {
-          state.sortFilter = '_sort=price&';
+          state.sortFilter = '_sort=rating';
+          break;
+        }
+        case 2: {
+          state.sortFilter = '_sort=price&_order=desc';
+          break;
+        }
+        case 3: {
+          state.sortFilter = '_sort=price';
+          break;
+        }
+        case 4: {
+          state.sortFilter = '_sort=name&_order=desc';
           break;
         }
         default: {
-          state.sortFilter = '_sort=name&_order=asc&';
+          state.sortFilter = '_sort=name';
           break;
         }
       }
