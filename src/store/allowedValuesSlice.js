@@ -30,6 +30,6 @@ const allowedValuesSlice = createSlice({
 export default allowedValuesSlice.reducer;
 
 export const selectAllowedValues = createSelector(
-  (state, name) => state.allowedValues[name],
+  (state, name) => state.allowedValues?.[name],
   (allowedValues) => allowedValues,
 );

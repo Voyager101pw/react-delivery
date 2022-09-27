@@ -2,8 +2,13 @@ import React from 'react';
 import { useGetCartQuery } from '../../store/apiSlice';
 
 function CartDetails() {
-  const { data: cart = {} } = useGetCartQuery();
-  const { totalDue = 0, amountPizzas = 0 } = cart;
+  const { data: cart = [] } = useGetCartQuery();
+  const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
+    {
+      amountPizzas: acc.amountPizzas + pizzaObj.amount,
+      amountPrice: acc.amountPrice + pizzaObj.amount * pizzaObj.price,
+    }
+  ), { amountPizzas: 0, amountPrice: 0 });
 
   return (
     <>
@@ -14,7 +19,7 @@ function CartDetails() {
 
       <div>
         Сумма заказа:
-        <b className="price">{`${totalDue} ₽`}</b>
+        <b className="price">{`${amountPrice} ₽`}</b>
       </div>
     </>
   );

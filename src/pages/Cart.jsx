@@ -1,9 +1,10 @@
 import React from 'react';
-
+import { useGetCartQuery } from '../store/apiSlice';
 import { FullCart, EmptyCart } from '../components/Cart';
 
 function Cart() {
-  const cartIsEmpty = true;
+  const { data: cart = [] } = useGetCartQuery();
+  const cartIsEmpty = !cart.length;
   return cartIsEmpty ? <EmptyCart /> : <FullCart />;
 }
 

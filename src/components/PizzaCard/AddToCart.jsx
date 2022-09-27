@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelectAllowedValues } from '../../hooks/useSelect';
 import { apiSlice } from '../../store/apiSlice';
 
 function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
   const {
-    id, imageUrl, price, name, sizes, types,
+    id, imageUrl, price, name,
   } = pizzaProps;
   const [allowedTypes, allowedSizes] = useSelectAllowedValues('types', 'sizes');
   const [addToCart] = apiSlice.useAddToCartMutation();
-  const { data: cart } = apiSlice.useGetCartQuery();
-  const { cartItems, totalDue, amountPizzas } = cart;
+  const { data: cart = [] } = apiSlice.useGetCartQuery();
 
   const nameSelectedType = allowedTypes[indexActiveType];
   const nameSelectedSize = allowedSizes[indexActiveSize];
@@ -18,7 +18,7 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
   const idSearchedPizza = extendedId;
 
   const pizzaIsExistInCart = () => {
-    const pizza = cartItems.filter(({ id: idPizzaInCart }) => idPizzaInCart === idSearchedPizza)[0];
+    const pizza = cart.filter(({ id: idPizzaInCart }) => idPizzaInCart === idSearchedPizza)[0];
     return Boolean(pizza);
   };
 
@@ -26,30 +26,22 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
     let updatedCartItems = null;
 
     if (pizzaIsExistInCart()) {
-      updatedCartItems = cartItems.map((cartItem) => (cartItem.id === idSearchedPizza
+      updatedCartItems = cart.map((cartItem) => (cartItem.id === idSearchedPizza
         ? ({ ...cartItem, amount: cartItem.amount + 1 })
         : cartItem
       ));
     } else {
-      updatedCartItems = [
-        ...cartItems,
-        {
-          id: extendedId,
-          name,
-          type: nameSelectedType,
-          size: nameSelectedSize,
-          imageUrl,
-          price,
-          amount: 1,
-        },
-      ];
+      updatedCartItems = {
+        id: extendedId,
+        name,
+        type: nameSelectedType,
+        size: nameSelectedSize,
+        imageUrl,
+        price,
+        amount: 1,
+      };
     }
-
-    addToCart({
-      cartItems: updatedCartItems,
-      totalDue: totalDue + price,
-      amountPizzas: amountPizzas + 1,
-    });
+    addToCart(updatedCartItems);
   };
 
   return (
@@ -64,3 +56,14 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
 }
 
 export default AddToCart;
+
+AddToCart.propTypes = {
+  pizzaProps: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  indexActiveType: PropTypes.number.isRequired,
+  indexActiveSize: PropTypes.number.isRequired,
+};

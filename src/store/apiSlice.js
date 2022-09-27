@@ -17,10 +17,18 @@ export const apiSlice = createApi({
       providesTags: ['getCart'],
     }),
     addToCart: builder.mutation({
-      query: (pizza) => ({
-        url: 'cart',
-        method: 'POST',
-        body: pizza,
+      query: (body) => ({
+        url: 'cart/',
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: [{ type: 'getCart' }],
+    }),
+    updateCart: builder.mutation({
+      query: (body) => ({
+        url: `cart/${body.id}`,
+        method: 'PUT',
+        body,
       }),
       invalidatesTags: () => [{ type: 'getCart' }],
     }),
@@ -31,6 +39,7 @@ export const {
   useGetPizzasQuery,
   useGetCartQuery,
   useAddToCartMutation,
+  useUpdateCartMutation,
 } = apiSlice;
 
 // api for lib "json-server":
