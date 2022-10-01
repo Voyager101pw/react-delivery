@@ -17,7 +17,7 @@ export const apiSlice = createApi({
       providesTags: (res) => (
         res
         // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
-          ? res.map(({ id }) => ({ type: 'cart', id }))
+          ? [...res.map(({ id }) => ({ type: 'cart', id })), 'cart']
           : ['cart']),
       // Если произойдет ошибка, то будет выдаваться результат прошлого и успешного запроса.
     }),
