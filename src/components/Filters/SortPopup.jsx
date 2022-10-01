@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import { useDispatch } from 'react-redux';
-import { toggleSort } from '../../store/filtersSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortQuery, setIndexActiveSort, selectActiveIndex } from '../../store/filtersSlice';
 import DropIcon from '../../assets/img/drop-icon.svg';
 import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function SortPopup() {
   const dispatch = useDispatch();
-  const [indxSelectedSort, setIndexSelectedSort] = useState(0);
+  const { indexActiveSort } = useSelector(selectActiveIndex);
+
   const [visiblePopup, setVisiblePopup] = useState(false);
   const sort = useSelectAllowedValues('sort');
 
@@ -16,16 +17,16 @@ function SortPopup() {
   };
 
   const onSelectItem = (indx) => {
-    dispatch(toggleSort(indx));
-    setIndexSelectedSort(indx);
+    dispatch(setSortQuery(indx));
+    dispatch(setIndexActiveSort(indx));
     setVisiblePopup(!visiblePopup);
   };
 
-  const nameCurrentSort = sort[indxSelectedSort];
+  const nameCurrentSort = sort[indexActiveSort];
   const renderSortItems = sort.map((sortName, index) => (
     <li
       key={sortName}
-      className={cn({ active: index === indxSelectedSort })}
+      className={cn({ active: index === indexActiveSort })}
       onClick={() => onSelectItem(index)}
     >
       {sortName}

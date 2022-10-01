@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import cn from 'classnames';
-import { useDispatch } from 'react-redux';
-import { toggleCategory } from '../../store/filtersSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategoryQuery, selectActiveIndex, setIndexActiveCategory } from '../../store/filtersSlice';
 import { useSelectAllowedValues } from '../../hooks/useSelect';
 
 function Categories() {
   const dispatch = useDispatch();
-  const [indexActiveCategory, setIndexActiveCategory] = useState(0);
+  const { indexActiveCategory } = useSelector(selectActiveIndex);
   const categories = useSelectAllowedValues('categories');
+
   const content = categories.map((category, index) => (
     <li
       key={category}
       className={cn({ active: index === indexActiveCategory })}
       onClick={() => {
-        dispatch(toggleCategory(index));
-        setIndexActiveCategory(index);
+        dispatch(setCategoryQuery(index));
+        dispatch(setIndexActiveCategory(index));
       }}
     >
       {category}

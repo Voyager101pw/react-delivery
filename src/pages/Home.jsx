@@ -4,12 +4,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { PizzaCard, Filters } from '../components';
 import { useGetPizzasQuery } from '../store/apiSlice';
-import { selectFilters } from '../store/filtersSlice';
+import { selectQuery } from '../store/filtersSlice';
 import Spinner from '../components/Spinner';
 
 function Home() {
-  const { categoryFilter, sortFilter } = useSelector(selectFilters);
-  const queryString = categoryFilter + sortFilter;
+  const { categoryQuery, sortQuery } = useSelector(selectQuery);
+  const queryString = categoryQuery + sortQuery;
 
   const { data: pizzas = [], isLoading: pizzasIsLoading } = useGetPizzasQuery(queryString);
   const renderCards = () => pizzas.map((props) => (
