@@ -3,7 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import TypesButton from './Types';
 import SizesButton from './Sizes';
-import AddToCart from './AddToCart';
+import { AddToCart } from '../Buttons';
 
 function PizzaCard(props) {
   const {

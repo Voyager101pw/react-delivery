@@ -1,6 +1,6 @@
-export { default as CartBottomButtons } from './CartBottomButtons';
-export { default as CartDetails } from './CartDetails';
-export { default as CartItem } from './CartItem';
-export { default as CartTop } from './CartTop';
+export { default as CartHeader } from './Header';
+export { default as Item } from './Item';
+export { default as Footer } from './Footer';
+
 export { default as EmptyCart } from './EmptyCart';
 export { default as FullCart } from './FullCart';

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { apiSlice } from '../../store/apiSlice';
 
-function CartItem({ pizza }) {
+function Item({ pizza }) {
   const { data: cart = [] } = apiSlice.useGetCartItemsQuery();
 
   const [updCartItem] = apiSlice.useUpdCartItemMutation();
@@ -61,7 +61,7 @@ function CartItem({ pizza }) {
   );
 }
 
-CartItem.propTypes = {
+Item.propTypes = {
   pizza: PropTypes.shape({
     amount: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
@@ -73,4 +73,4 @@ CartItem.propTypes = {
   }).isRequired,
 };
 
-export default CartItem;
+export default Item;

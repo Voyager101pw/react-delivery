@@ -1,7 +1,8 @@
 import React from 'react';
 import { useGetCartItemsQuery } from '../../store/apiSlice';
+import { GetBack, PayNow } from '../Buttons';
 
-function CartDetails() {
+function Footer() {
   const { data: cart = [] } = useGetCartItemsQuery();
   const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
     {
@@ -12,17 +13,24 @@ function CartDetails() {
 
   return (
     <>
-      <div>
-        Всего пиццы:
-        <b>{`${amountPizzas} шт`}</b>
+      <div className="cart__details">
+        <div>
+          Всего пиццы:
+          <b>{`${amountPizzas} шт`}</b>
+        </div>
+
+        <div>
+          Сумма заказа:
+          <b className="price">{`${amountPrice} ₽`}</b>
+        </div>
       </div>
 
-      <div>
-        Сумма заказа:
-        <b className="price">{`${amountPrice} ₽`}</b>
+      <div className="cart__bottom-buttons">
+        <GetBack />
+        <PayNow />
       </div>
     </>
   );
 }
 
-export default CartDetails;
+export default Footer;

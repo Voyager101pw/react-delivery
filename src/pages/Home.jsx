@@ -2,7 +2,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { PizzaCard, Filters } from '../components';
+import PizzaCard from '../components/PizzaCard/PizzaCard';
+import Filters from '../components/Filters/Filters';
 import { useGetPizzasQuery } from '../store/apiSlice';
 import { selectQuery } from '../store/filtersSlice';
 import Spinner from '../components/Spinner';

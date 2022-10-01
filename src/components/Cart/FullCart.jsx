@@ -1,10 +1,9 @@
 import React from 'react';
 import { useGetCartItemsQuery } from '../../store/apiSlice';
 
-import CartTop from './CartTop';
-import CartItem from './CartItem';
-import CartDetails from './CartDetails';
-import CartBottomButtons from './CartBottomButtons';
+import CartTop from './Header';
+import CartItem from './Item';
+import Footer from './Footer';
 
 function FullCart() {
   const { data: cart = [], isSuccess } = useGetCartItemsQuery();
@@ -23,14 +22,9 @@ function FullCart() {
         {renderCartItems}
       </div>
 
-      <div className="cart__details">
-        <CartDetails />
+      <div className="cart__footer">
+        <Footer />
       </div>
-
-      <div className="cart__bottom-buttons">
-        <CartBottomButtons />
-      </div>
-
     </div>
   );
 }

@@ -9,7 +9,7 @@ function EmptyCart() {
       <div className="title__sub empty-cart__subtitle">Вероятно всего, вы не заказывали еще пиццу.</div>
       <div className="title__sub empty-cart__subtitle">Для того, чтобы заказать пиццу, перейдите на главную страницу.</div>
       <EmptyCartIcon className="empty-cart__icon" />
-      <GetBack className="cart__btn-back" />
+      <GetBack />
     </div>
   );
 }
