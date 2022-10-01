@@ -162,8 +162,7 @@
       "rating": 7
     }
   ],
-  "cart": [
-  ],
+  "cartItems": [],
   "allowedValues": {
     "sizes": [
       26,
