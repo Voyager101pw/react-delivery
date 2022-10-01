@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useGetCartQuery, useUpdateCartMutation } from '../../store/apiSlice';
+import cn from 'classnames';
+import { apiSlice } from '../../store/apiSlice';
 
 function CartItem({ pizza }) {
-  const { data: cart = [] } = useGetCartQuery();
-  const [updateCart] = useUpdateCartMutation();
+  const { data: cart = [] } = apiSlice.useGetCartItemsQuery();
 
-  const handlerAmount = (arg) => {
-    const [editablePizza] = cart.filter((pizzaObj) => pizzaObj.id === pizza.id);
-    updateCart({ ...editablePizza, amount: editablePizza.amount + arg });
+  const [updCartItem] = apiSlice.useUpdCartItemMutation();
+  const [delCartItem] = apiSlice.useDelCartItemMutation();
+
+  const handlerAmount = (number) => {
+    const [item] = cart.filter((itemInCart) => itemInCart.id === pizza.id);
+    updCartItem({ ...item, amount: item.amount + number });
   };
 
+  const amountButton = (type) => {
+    const classes = cn(
+      `btn btn--outline btn--circle btn--${type}`,
+      { 'btn--disabled': pizza.amount === 1 && type === 'negative' },
+    );
+    const handler = type === 'positive'
+      ? () => handlerAmount(1)
+      : () => pizza.amount > 1 && handlerAmount(-1);
+    return (
+      <button type="button" className={classes} onClick={handler} />
+    );
+  };
   return (
     <div className="item cart__item">
 
@@ -22,9 +37,9 @@ function CartItem({ pizza }) {
       </div>
 
       <div className="item__count">
-        <div className="btn btn--outline btn--circle btn--negative" onClick={() => pizza.amount && handlerAmount(-1)} />
+        {amountButton('negative')}
         <b>{pizza.amount}</b>
-        <div className="btn btn--outline btn--circle btn--positive" onClick={() => handlerAmount(1)} />
+        {amountButton('positive')}
       </div>
 
       <div className="item__price">
@@ -34,7 +49,13 @@ function CartItem({ pizza }) {
       </div>
 
       <div className="item__remove">
-        <div className="btn btn--remove btn--outline btn--circle btn--gray" />
+        <button
+          type="button"
+          className="btn btn--remove btn--outline btn--circle btn--gray"
+          onClick={() => {
+            delCartItem(pizza.id);
+          }}
+        />
       </div>
     </div>
   );

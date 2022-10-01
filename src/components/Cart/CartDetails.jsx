@@ -1,8 +1,8 @@
 import React from 'react';
-import { useGetCartQuery } from '../../store/apiSlice';
+import { useGetCartItemsQuery } from '../../store/apiSlice';
 
 function CartDetails() {
-  const { data: cart = [] } = useGetCartQuery();
+  const { data: cart = [] } = useGetCartItemsQuery();
   const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
     {
       amountPizzas: acc.amountPizzas + pizzaObj.amount,

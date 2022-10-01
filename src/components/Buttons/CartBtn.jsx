@@ -1,9 +1,9 @@
 import React from 'react';
 import CartIcon from '../../assets/img/cart-icon.svg';
-import { useGetCartQuery } from '../../store/apiSlice';
+import { useGetCartItemsQuery } from '../../store/apiSlice';
 
 function CartBtn() {
-  const { data: cart = [] } = useGetCartQuery();
+  const { data: cart = [] } = useGetCartItemsQuery();
   const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
     {
       amountPizzas: acc.amountPizzas + pizzaObj.amount,

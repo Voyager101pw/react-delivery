@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetCartQuery } from '../../store/apiSlice';
+import { useGetCartItemsQuery } from '../../store/apiSlice';
 
 import CartTop from './CartTop';
 import CartItem from './CartItem';
@@ -7,7 +7,7 @@ import CartDetails from './CartDetails';
 import CartBottomButtons from './CartBottomButtons';
 
 function FullCart() {
-  const { data: cart = [], isSuccess } = useGetCartQuery();
+  const { data: cart = [], isSuccess } = useGetCartItemsQuery();
   const renderCartItems = isSuccess
     ? cart.map((pizzaProps) => <CartItem key={pizzaProps.id} pizza={pizzaProps} />)
     : [];

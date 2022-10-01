@@ -12,7 +12,7 @@ function CartTitle() {
       </div>
       <div className="cart__clear-basket">
         <BasketIcon className="basket-icon basket-icon--gray" />
-        <div>Очистить корзину </div>
+        <span>Очистить корзину </span>
       </div>
     </>
   );

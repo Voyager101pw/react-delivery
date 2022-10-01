@@ -9,29 +9,20 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
     id, imageUrl, price, name,
   } = pizzaProps;
   const [allowedTypes, allowedSizes] = useSelectAllowedValues('types', 'sizes');
-  const [addToCart] = apiSlice.useAddToCartMutation();
-  const { data: cart = [] } = apiSlice.useGetCartQuery();
+  const [updateCart] = apiSlice.useUpdCartItemMutation();
+  const [addToCart] = apiSlice.useAddCartItemMutation();
+  const { data: cart = [] } = apiSlice.useGetCartItemsQuery();
 
   const nameSelectedType = allowedTypes[indexActiveType];
   const nameSelectedSize = allowedSizes[indexActiveSize];
   const extendedId = nameSelectedType + nameSelectedSize + id;
   const idSearchedPizza = extendedId;
 
-  const pizzaIsExistInCart = () => {
-    const pizza = cart.filter(({ id: idPizzaInCart }) => idPizzaInCart === idSearchedPizza)[0];
-    return Boolean(pizza);
-  };
-
   const handlerAddToCart = () => {
-    let updatedCartItems = null;
-
-    if (pizzaIsExistInCart()) {
-      updatedCartItems = cart.map((cartItem) => (cartItem.id === idSearchedPizza
-        ? ({ ...cartItem, amount: cartItem.amount + 1 })
-        : cartItem
-      ));
-    } else {
-      updatedCartItems = {
+    const [item] = cart.filter((cartItem) => (cartItem.id === idSearchedPizza));
+    item
+      ? updateCart({ ...item, amount: item.amount + 1 })
+      : addToCart({
         id: extendedId,
         name,
         type: nameSelectedType,
@@ -39,9 +30,7 @@ function AddToCart({ pizzaProps, indexActiveType, indexActiveSize }) {
         imageUrl,
         price,
         amount: 1,
-      };
-    }
-    addToCart(updatedCartItems);
+      });
   };
 
   return (

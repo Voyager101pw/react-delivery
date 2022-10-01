@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: '/api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:5001/' }),
-  tagTypes: ['getCart', 'getCartInfo'],
+  tagTypes: ['cart'],
 
   endpoints: (builder) => ({
     getPizza: builder.query({
@@ -12,34 +12,49 @@ export const apiSlice = createApi({
     getPizzas: builder.query({
       query: (queryString) => (queryString ? `/pizzas?${queryString}` : '/pizzas'),
     }),
-    getCart: builder.query({
-      query: () => '/cart',
-      providesTags: ['getCart'],
+    getCartItems: builder.query({
+      query: () => '/cartItems',
+
+      providesTags: (res) => (
+        res
+        // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
+          ? res.map(({ id }) => ({ type: 'cart', id }))
+          : ['cart']),
+      // Если произойдет ошибка, то будет выдаваться результат прошлого и успешного запроса.
     }),
-    addToCart: builder.mutation({
-      query: (body) => ({
-        url: 'cart/',
+    addCartItem: builder.mutation({
+      query: (item) => ({
+        url: 'cartItems/',
+        method: 'POST',
+        body: item,
+      }),
+      invalidatesTags: [{ type: 'cart' }],
+      // Делает недействительным кэшированный результат запроса с тогом cart
+    }),
+    updCartItem: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `cartItems/${id}`,
         method: 'PUT',
         body,
       }),
-      invalidatesTags: [{ type: 'getCart' }],
+      invalidatesTags: (res, err, { id }) => [{ type: 'cart', id }],
     }),
-    updateCart: builder.mutation({
-      query: (body) => ({
-        url: `cart/${body.id}`,
-        method: 'PUT',
-        body,
+    delCartItem: builder.mutation({
+      query: (id) => ({
+        url: `cartItems/${id}`,
+        method: 'DELETE',
       }),
-      invalidatesTags: () => [{ type: 'getCart' }],
+      invalidatesTags: (res, err, id) => [{ type: 'cart', id }],
     }),
   }),
 });
 
 export const {
   useGetPizzasQuery,
-  useGetCartQuery,
-  useAddToCartMutation,
-  useUpdateCartMutation,
+  useGetCartItemsQuery,
+  useAddCartItemMutation,
+  useUpdCartItemMutation,
+  useDelCartItemMutation,
 } = apiSlice;
 
 // api for lib "json-server":
