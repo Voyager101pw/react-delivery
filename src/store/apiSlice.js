@@ -14,7 +14,6 @@ export const apiSlice = createApi({
     }),
     getCartItems: builder.query({
       query: () => '/cartItems',
-
       providesTags: (res) => (
         res
         // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
@@ -28,7 +27,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: item,
       }),
-      invalidatesTags: [{ type: 'cart' }],
+      invalidatesTags: ['cart'],
       // Делает недействительным кэшированный результат запроса с тогом cart
     }),
     updCartItem: builder.mutation({
