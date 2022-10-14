@@ -4,7 +4,7 @@ import { apiSlice } from '../../store/apiSlice';
 import CartIcon from '../../assets/img/cart-icon.svg';
 import BasketIcon from '../../assets/img/basket-icon.svg';
 
-function Header() {
+const HeaderCart: React.FC = () => {
   const [deleteCartItem] = apiSlice.useDelCartItemMutation();
   const { data: cartItems = [] } = apiSlice.useGetCartItemsQuery();
 
@@ -26,4 +26,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderCart;

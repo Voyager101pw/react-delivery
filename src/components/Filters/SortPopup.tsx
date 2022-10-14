@@ -3,20 +3,20 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortQuery, setIndexActiveSort, selectActiveIndex } from '../../store/filtersSlice';
 import DropIcon from '../../assets/img/drop-icon.svg';
-import { useSelectAllowedValues } from '../../hooks/useSelect';
+import useAllowedValues from '../../hooks/useAllowedValues';
 
-function SortPopup() {
+const SortPopup: React.FC = () => {
   const dispatch = useDispatch();
   const { indexActiveSort } = useSelector(selectActiveIndex);
 
   const [visiblePopup, setVisiblePopup] = useState(false);
-  const sort = useSelectAllowedValues('sort');
+  const { sort } = useAllowedValues();
 
   const toggleVisiblePopup = () => {
     setVisiblePopup(!visiblePopup);
   };
 
-  const onSelectItem = (indx) => {
+  const onSelectItem = (indx: number) => {
     dispatch(setSortQuery(indx));
     dispatch(setIndexActiveSort(indx));
     setVisiblePopup(!visiblePopup);

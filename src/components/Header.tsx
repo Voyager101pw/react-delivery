@@ -4,7 +4,7 @@ import { Outlet, Link } from 'react-router-dom';
 import pizzaLogo from '../assets/img/pizza.png';
 import { GoToCart } from './Buttons';
 
-function Header() {
+const Header: React.FC = () => {
   return (
     <>
       <div className="header">

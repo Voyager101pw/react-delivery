@@ -1,13 +1,24 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { string } from 'prop-types';
+import { RootState } from 'store';
+
+interface FiltersSliceState {
+  indexActiveCategory: number;
+  indexActiveSort: number;
+  categoryQuery: string;
+  sortQuery: string;
+}
+
+const initialState: FiltersSliceState = {
+  indexActiveCategory: 0,
+  indexActiveSort: 0,
+  categoryQuery: '',
+  sortQuery: '',
+}
 
 const filtersSlice = createSlice({
   name: 'filters',
-  initialState: {
-    indexActiveCategory: 0,
-    indexActiveSort: 0,
-    categoryQuery: '',
-    sortQuery: '',
-  },
+  initialState,
   reducers: {
     setIndexActiveCategory: (state, { payload: newIndex }) => {
       state.indexActiveCategory = newIndex;
@@ -54,13 +65,13 @@ export const {
 } = filtersSlice.actions;
 
 export const selectQuery = createSelector(
-  (state) => state.filters,
+  (state: RootState) => state.filters,
   (filters) => filters,
 );
 
 export const selectActiveIndex = createSelector(
-  (state) => state.filters.indexActiveCategory,
-  (state) => state.filters.indexActiveSort,
+  (state: RootState) => state.filters.indexActiveCategory,
+  (state: RootState) => state.filters.indexActiveSort,
   (indexActiveCategory, indexActiveSort) => ({ indexActiveCategory, indexActiveSort }),
 );
 

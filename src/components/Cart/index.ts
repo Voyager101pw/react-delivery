@@ -1,4 +1,4 @@
-export { default as CartHeader } from './Header';
+export { default as CartHeader } from './HeadeCartr';
 export { default as Item } from './Item';
 export { default as Footer } from './Footer';
 

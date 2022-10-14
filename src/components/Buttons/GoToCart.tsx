@@ -2,7 +2,7 @@ import React from 'react';
 import CartIcon from '../../assets/img/cart-icon.svg';
 import { useGetCartItemsQuery } from '../../store/apiSlice';
 
-function CartBtn() {
+const CartBtn: React.FC = () => {
   const { data: cart = [] } = useGetCartItemsQuery();
   const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
     {

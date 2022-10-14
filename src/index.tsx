@@ -10,14 +10,15 @@ import { fetchData } from './store/allowedValuesSlice';
 
 // import reportWebVitals from './reportWebVitals.js';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(container);
 
 store.dispatch(fetchData());
 
 root.render(
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

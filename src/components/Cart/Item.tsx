@@ -1,20 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { apiSlice } from '../../store/apiSlice';
+import { CartItem } from '../../store/types';
 
-function Item({ pizza }) {
+interface ItemProps {
+  pizza: CartItem;
+}
+
+type TypeButton = 'negative' | 'positive';
+
+const Item: React.FC<ItemProps> = ({ pizza }) => {
   const { data: cart = [] } = apiSlice.useGetCartItemsQuery();
 
   const [updCartItem] = apiSlice.useUpdCartItemMutation();
   const [delCartItem] = apiSlice.useDelCartItemMutation();
 
-  const handlerAmount = (number) => {
+  const handlerAmount = (number: number) => {
     const [item] = cart.filter((itemInCart) => itemInCart.id === pizza.id);
     updCartItem({ ...item, amount: item.amount + number });
   };
 
-  const amountButton = (type) => {
+  const amountButton = (type: TypeButton) => {
     const classes = cn(
       `btn btn--outline btn--circle btn--${type}`,
       { 'btn--disabled': pizza.amount === 1 && type === 'negative' },
@@ -26,6 +32,7 @@ function Item({ pizza }) {
       <button type="button" className={classes} onClick={handler} />
     );
   };
+
   return (
     <div className="item cart__item">
 
@@ -60,17 +67,5 @@ function Item({ pizza }) {
     </div>
   );
 }
-
-Item.propTypes = {
-  pizza: PropTypes.shape({
-    amount: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    size: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default Item;

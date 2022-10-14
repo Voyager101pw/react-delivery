@@ -2,7 +2,7 @@ import React from 'react';
 import { useGetCartItemsQuery } from '../../store/apiSlice';
 import { GetBack, PayNow } from '../Buttons';
 
-function Footer() {
+const Footer:React.FC = () => {
   const { data: cart = [] } = useGetCartItemsQuery();
   const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
     {

@@ -2,7 +2,7 @@ import React from 'react';
 import { GetBack } from '../Buttons';
 import EmptyCartIcon from '../../assets/img/empty-cart-icon.svg';
 
-function EmptyCart() {
+const EmptyCart: React.FC = () => {
   return (
     <div className="empty-cart">
       <div className="title empty-cart__title">Корзина пуста 😕</div>

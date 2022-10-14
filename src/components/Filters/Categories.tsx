@@ -1,18 +1,17 @@
 import React from 'react';
-import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryQuery, selectActiveIndex, setIndexActiveCategory } from '../../store/filtersSlice';
-import { useSelectAllowedValues } from '../../hooks/useSelect';
+import useAllowedValues from '../../hooks/useAllowedValues';
 
-function Categories() {
+const Categories: React.FC = () => {
   const dispatch = useDispatch();
   const { indexActiveCategory } = useSelector(selectActiveIndex);
-  const categories = useSelectAllowedValues('categories');
+  const { categories } = useAllowedValues();
 
   const content = categories.map((category, index) => (
     <li
       key={category}
-      className={cn({ active: index === indexActiveCategory })}
+      className={index === indexActiveCategory ? 'active' : ''}
       onClick={() => {
         dispatch(setCategoryQuery(index));
         dispatch(setIndexActiveCategory(index));
