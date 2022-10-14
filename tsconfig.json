@@ -1,0 +1,44 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    // "moduleResolution": "classic",
+    // "target": "ES2015",
+    // "strictNullChecks": true,
+    // "noEmitOnError": true,
+    // "outDir": "dist",
+
+    // "watch": true,
+
+    // "noImplicitAny": true,
+    // "removeComments": false,
+    // "sourceMap": true,
+    "baseUrl": "src", 
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    
+    "module": "esnext",
+    "jsx": "react-jsx",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    // "noEmit": true,
+    "importHelpers": true,
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "public",
+    "dist",
+    "tsconfig.json"
+  ]
+}

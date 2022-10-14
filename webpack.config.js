@@ -7,9 +7,10 @@ const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode,
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: path.join(__dirname, 'src/index.tsx'),
+  // entry: path.join(__dirname, 'src/index.js'),
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   output: {
     path: path.join(__dirname, 'dist', 'public'),
@@ -20,6 +21,7 @@ module.exports = {
     historyApiFallback: true, // https://blog.jimmydc.com/webpack-history-api-fallback/
     open: true,
     port: 5000,
+    // contentBase: path.join(__dirname, 'dist'),
     static: {
       directory: path.join(__dirname, 'dist'),
     },
@@ -43,7 +45,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(s[ac]|c)ss$/,
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.s([ac]|c)ss$/,
         use: [
           mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -59,7 +66,7 @@ module.exports = {
       //   },
       // },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/, // исключать
         use: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
       },
