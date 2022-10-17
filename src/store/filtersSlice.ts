@@ -1,6 +1,5 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { string } from 'prop-types';
-import { RootState } from 'store';
+import { RootState } from '../store';
 
 interface FiltersSliceState {
   indexActiveCategory: number;
@@ -14,7 +13,7 @@ const initialState: FiltersSliceState = {
   indexActiveSort: 0,
   categoryQuery: '',
   sortQuery: '',
-}
+};
 
 const filtersSlice = createSlice({
   name: 'filters',

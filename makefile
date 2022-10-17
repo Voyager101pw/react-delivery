@@ -11,7 +11,7 @@ install-deps:
 	npm ci
 
 lint:
-	npx eslint . --ext js,jsx
+	npx eslint . --ext ts,tsx
 
 lint-fix:
-	npx eslint . --ext js,jsx --fix .
+	npx eslint . --ext ts,tsx --fix .

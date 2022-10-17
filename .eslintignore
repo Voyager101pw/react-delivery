@@ -1,3 +1,5 @@
 node_modules
 dist
 webpack.config.js
+src/components/Spinner.tsx
+src/reportWebVitals.js

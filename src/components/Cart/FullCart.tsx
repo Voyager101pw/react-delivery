@@ -8,25 +8,24 @@ import Footer from './Footer';
 const FullCart: React.FC = () => {
   const { data: cart = [], isSuccess } = useGetCartItemsQuery();
   const renderCartItems = isSuccess
-    ? cart.map((pizzaProps) => <CartItem key={pizzaProps.id} pizza={pizzaProps} />)
+    ? cart.map((pizzaProps) => (
+      <CartItem key={pizzaProps.id} pizza={pizzaProps} />
+    ))
     : [];
 
   return (
     <div className="cart">
-
       <div className="cart__top">
         <CartTop />
       </div>
 
-      <div className="cart__items">
-        {renderCartItems}
-      </div>
+      <div className="cart__items">{renderCartItems}</div>
 
       <div className="cart__footer">
         <Footer />
       </div>
     </div>
   );
-}
+};
 
 export default FullCart;

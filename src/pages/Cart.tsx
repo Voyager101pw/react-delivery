@@ -6,6 +6,6 @@ const Cart: React.FC = () => {
   const { data: cart = [] } = useGetCartItemsQuery();
   const cartIsEmpty = !cart.length;
   return cartIsEmpty ? <EmptyCart /> : <FullCart />;
-}
+};
 
 export default Cart;

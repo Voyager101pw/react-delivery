@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Pizza, CartItem } from './types'
+import { Pizza, CartItem } from './types';
 
 export const apiSlice = createApi({
   reducerPath: '/api',
@@ -7,24 +7,31 @@ export const apiSlice = createApi({
   tagTypes: ['cart'],
 
   endpoints: (builder) => ({
-    getPizza: builder.query<Pizza, (number | string)>({
+    getPizza: builder.query<Pizza | undefined, number | string>({
       query: (id) => `/pizzas/${id}`,
     }),
 
-    getPizzas: builder.query<(Pizza[] | []), string>({
-      query: (queryString) => (queryString ? `/pizzas?${queryString}` : '/pizzas'),
+    getPizzas: builder.query<Pizza[] | undefined, string>({
+      query: (queryString) =>
+        queryString ? `/pizzas?${queryString}` : '/pizzas',
     }),
 
-    getCartItems: builder.query<(CartItem[] | []), void>({
+    getCartItems: builder.query<CartItem[] | undefined, void>({
       query: () => '/cartItems',
-      providesTags: (cartItems): any => (
+      providesTags: (cartItems): any =>
         cartItems
-        // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
-          ? [...cartItems.map(({ id } : { id: string }) => ({ type: 'cart', id })), 'cart']
-          : ['cart']),
+          ? // https://redux-toolkit.js.org/rtk-query/usage/mutations#revalidation-example
+          [
+            ...cartItems.map(({ id }: { id: string }) => ({
+              type: 'cart',
+              id,
+            })),
+            'cart',
+          ]
+          : ['cart'],
       // Если произойдет ошибка, то будет выдаваться результат прошлого и успешного запроса.
     }),
-
+    
     addCartItem: builder.mutation<void, CartItem>({
       query: (item) => ({
         url: 'cartItems/',
@@ -44,7 +51,7 @@ export const apiSlice = createApi({
       invalidatesTags: (res, err, { id }) => [{ type: 'cart', id }],
     }),
 
-    delCartItem: builder.mutation<void, (number | string)>({
+    delCartItem: builder.mutation<void, number | string>({
       query: (id) => ({
         url: `cartItems/${id}`,
         method: 'DELETE',
@@ -67,7 +74,5 @@ export const {
 // Разбритие на страницы (лимит): https://github.com/typicode/json-server#paginate
 // Сортировка: https://github.com/typicode/json-server#paginate
 
-
-// TS endpoints "build.query<...>" 
-//https://redux-toolkit.js.org/rtk-query/usage-with-typescript#typing-query-and-mutation-endpoints
-
+// TS endpoints "build.query<...>"
+// https://redux-toolkit.js.org/rtk-query/usage-with-typescript#typing-query-and-mutation-endpoints

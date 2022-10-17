@@ -10,6 +10,6 @@ const GetBackBtn: React.FC = () => {
       Вернуться назад
     </div>
   );
-}
+};
 
 export default GetBackBtn;

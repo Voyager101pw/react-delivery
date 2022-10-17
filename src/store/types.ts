@@ -7,7 +7,7 @@ export type Pizza = {
   price: number;
   category: number;
   rating: number;
-}
+};
 
 export type CartItem = {
   id: string,
@@ -17,4 +17,4 @@ export type CartItem = {
   imageUrl: string,
   price: number,
   amount: number
-}
+};

@@ -8,7 +8,7 @@ const HeaderCart: React.FC = () => {
   const [deleteCartItem] = apiSlice.useDelCartItemMutation();
   const { data: cartItems = [] } = apiSlice.useGetCartItemsQuery();
 
-  const handlerClearCart = () => {
+  const handlerClearCart = (): void => {
     cartItems.forEach(({ id }) => deleteCartItem(id));
   };
 
@@ -24,6 +24,6 @@ const HeaderCart: React.FC = () => {
       </div>
     </>
   );
-}
+};
 
 export default HeaderCart;

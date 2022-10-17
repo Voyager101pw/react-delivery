@@ -19,6 +19,6 @@ const CartBtn: React.FC = () => {
       <div className="btn__price">{amountPizzas}</div>
     </button>
   );
-}
+};
 
 export default CartBtn;

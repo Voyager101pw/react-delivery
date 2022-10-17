@@ -15,12 +15,12 @@ const Item: React.FC<ItemProps> = ({ pizza }) => {
   const [updCartItem] = apiSlice.useUpdCartItemMutation();
   const [delCartItem] = apiSlice.useDelCartItemMutation();
 
-  const handlerAmount = (number: number) => {
+  const handlerAmount = (number: number): void => {
     const [item] = cart.filter((itemInCart) => itemInCart.id === pizza.id);
     updCartItem({ ...item, amount: item.amount + number });
   };
 
-  const amountButton = (type: TypeButton) => {
+  const countButton = (type: TypeButton): JSX.Element => {
     const classes = cn(
       `btn btn--outline btn--circle btn--${type}`,
       { 'btn--disabled': pizza.amount === 1 && type === 'negative' },
@@ -44,9 +44,9 @@ const Item: React.FC<ItemProps> = ({ pizza }) => {
       </div>
 
       <div className="item__count">
-        {amountButton('negative')}
+        {countButton('negative')}
         <b>{pizza.amount}</b>
-        {amountButton('positive')}
+        {countButton('positive')}
       </div>
 
       <div className="item__price">
@@ -66,6 +66,6 @@ const Item: React.FC<ItemProps> = ({ pizza }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Item;

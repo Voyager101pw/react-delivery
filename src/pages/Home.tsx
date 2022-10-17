@@ -1,15 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PizzaCard from '../components/PizzaCard';
 import Filters from '../components/Filters';
 import Spinner from '../components/Spinner';
-import useFetchPizza from '../hooks/useFetchPizza';
+import { useFetchPizza } from '../hooks';
 
 const Home: React.FC = () => {
   const { pizza, pizzaIsLoading } = useFetchPizza();
-
-  const renderCards = () => pizza.map((pizzaProp) => (
+  const renderCards = (): JSX.Element[] => pizza.map((pizzaProp) => (
     <PizzaCard pizza={pizzaProp} key={pizzaProp.id} />
   ));
   const content = pizzaIsLoading ? <Spinner /> : renderCards();
@@ -24,6 +21,6 @@ const Home: React.FC = () => {
       </div>
     </>
   );
-}
+};
 
 export default Home;
