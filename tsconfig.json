@@ -12,7 +12,11 @@
     // "noImplicitAny": true,
     // "removeComments": false,
     // "sourceMap": true,
-    "baseUrl": "src", 
+
+    // https://stackoverflow.com/questions/42123382/import-module-from-root-path-in-typescript
+    // "baseUrl": "./src",
+    // "rootDir": "./src", 
+    
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -39,6 +43,7 @@
     "node_modules",
     "public",
     "dist",
-    "tsconfig.json"
+    "tsconfig.json",
+    "src/reportWebVitals.js"
   ]
 }

@@ -5,39 +5,81 @@
   },
   "extends": [
     "eslint:recommended",
-    "airbnb",
+    // "airbnb",
+    "airbnb-typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
-    "plugin:functional/recommended"
+    // "plugin:functional/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
-  "parser": "@babel/eslint-parser",
+  // не поддерживает экспериментальне функции и нестандартный синтаксис (Flow или TypeScript)
+  // "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true
+      // "jsx": true
+      "tsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
-  "plugins": ["react", "functional"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": [
+    "react"
+  ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    // "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "import/extensions": 0,
     "import/no-unresolved": 0,
     "no-console": 0,
-    "functional/no-conditional-statement": 0,
-    "functional/no-expression-statement": 0,
-    "functional/immutable-data": 0 ,
-    "functional/functional-parameters": 0,
-    "functional/no-try-statement": 0,
-    "functional/no-throw-statement": 0,
+    // "functional/no-conditional-statement": 0,
+    // "functional/no-expression-statement": 0,
+    // "functional/immutable-data": 0,
+    // "functional/functional-parameters": 0,
+    // "functional/no-try-statement": 0,
+    // "functional/no-throw-statement": 0,
     "no-param-reassign": 0,
     "testing-library/no-debug": 0,
     "import/prefer-default-export": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 0,
     "jsx-a11y/no-static-element-interactions": 0,
-    "max-len": ["error", { "code": 125 }]
+    "max-len": [
+      "error",
+      {
+        "code": 125
+      }
+    ],
+    // При включении этого правила будут генерироваться некоторые ошибки ESLint, которые будут исправлены путем явного добавления возвращаемого типа функций в ваш код.
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": 0
   }
 }

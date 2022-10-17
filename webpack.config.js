@@ -14,7 +14,9 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist', 'public'),
-    publicPath: '/', // для более быстрой компиляции рекомендуется использовать фиксированный publicPath (например , '/' или '').
+
+    // для более быстрой компиляции рекомендуется использовать фиксированный publicPath (например , '/' или '').
+    publicPath: '/',
   },
 
   devServer: {

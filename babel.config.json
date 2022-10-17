@@ -1,8 +1,8 @@
 {
   "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-env", // — создание кода, подходящего для старых браузеров.
+    "@babel/preset-react",  // — настройка транспилятора для работы с React-кодом.
+    "@babel/preset-typescript" // — настройка транспилятора для работы с TypeScript-кодом.
   ]
 }
 
