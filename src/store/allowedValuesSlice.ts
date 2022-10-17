@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { RootState } from '.';
 
 interface AllowedValuesTypes {
   allowedTypes: string[];
@@ -14,14 +15,12 @@ interface AllowedValuesTypes {
 export const fetchData = createAsyncThunk(
   'allowedValues/fetchData',
   async () => {
-    const response = await axios.get(
-      'http://localhost:5001/allowedValues'
+    const { data: allowedValues } = await axios.get<AllowedValuesTypes>(
+      'http://localhost:5001/allowedValues',
     );
-    const allowedValues: AllowedValuesTypes = response.data;
     return allowedValues;
-  }
+  },
 );
-
 
 const initialState: AllowedValuesTypes = {
   allowedTypes: [],
@@ -34,15 +33,17 @@ const allowedValuesSlice = createSlice({
   name: 'allowedValues',
   initialState,
   extraReducers(builder) {
-    builder.addCase(fetchData.fulfilled, (state, { payload: allowedValues }: { payload: AllowedValuesTypes}) => {
+    builder.addCase(fetchData.fulfilled, (state, { payload: allowedValues }) => {
       Object.entries(allowedValues).forEach(
-        ([name, values]: [string, any[]]): void => {
+        ([name, values]): void => {
           state[name as keyof AllowedValuesTypes] = values;
-        }
+        },
       );
     });
   },
   reducers: {},
 });
+
+export const selectAllowedValues = (state: RootState ) : AllowedValuesTypes => state.allowedValues;
 
 export default allowedValuesSlice.reducer;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryQuery, selectActiveIndex, setIndexActiveCategory } from '../../store/filtersSlice';
-import useAllowedValues from '../../hooks/useAllowedValues';
+import { selectAllowedValues } from '../../store/allowedValuesSlice';
 
 const Categories: React.FC = () => {
   const dispatch = useDispatch();
   const { indexActiveCategory } = useSelector(selectActiveIndex);
-  const { categories } = useAllowedValues();
+  const { categories } = useSelector(selectAllowedValues);
 
   const content = categories.map((category, index) => (
     <li
@@ -26,6 +26,6 @@ const Categories: React.FC = () => {
       {content}
     </ul>
   );
-}
+};
 
 export default Categories;
