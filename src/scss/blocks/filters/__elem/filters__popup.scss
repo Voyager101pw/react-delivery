@@ -3,6 +3,7 @@
   margin-top: 15px;
   padding: 10px 0px;
   right: 0;
+  z-index: 1;
 
   background-color: #fff;
   border-radius: 15px;
@@ -11,6 +12,10 @@
   li {
     padding: 12px 20px;
     cursor: pointer;
+
+    &:hover {
+      background-color: rgba(254, 95, 30, 0.1);
+    }
   }
   
   .active {

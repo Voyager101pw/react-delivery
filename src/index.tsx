@@ -14,7 +14,6 @@ const container = document.getElementById('root') as HTMLElement;
 const root = ReactDOM.createRoot(container);
 
 store.dispatch(fetchData());
-
 root.render(
   <Provider store={store}>
     <App />

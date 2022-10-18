@@ -11,8 +11,6 @@ interface ReturnedPizzaType {
 export const useFetchPizza = (): ReturnedPizzaType => {
   const { categoryQuery, sortQuery } = useSelector(selectQuery);
   const queryString = categoryQuery + sortQuery;
-
   const { data: pizza = [], isLoading: pizzaIsLoading } = useGetPizzasQuery(queryString);
-
   return { pizza, pizzaIsLoading };
 };
