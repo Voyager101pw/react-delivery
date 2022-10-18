@@ -2,15 +2,15 @@ import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface FiltersSliceState {
-  indexActiveCategory: number;
-  indexActiveSort: number;
+  activeCategory: number;
+  activeSort: number;
   categoryQuery: string;
   sortQuery: string;
 }
 
 const initialState: FiltersSliceState = {
-  indexActiveCategory: 0,
-  indexActiveSort: 0,
+  activeCategory: 0,
+  activeSort: 0,
   categoryQuery: '',
   sortQuery: '',
 };
@@ -20,10 +20,10 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setIndexActiveCategory: (state, { payload: newIndex }) => {
-      state.indexActiveCategory = newIndex;
+      state.activeCategory = newIndex;
     },
     setIndexActiveSort: (state, { payload: newIndex }) => {
-      state.indexActiveSort = newIndex;
+      state.activeSort = newIndex;
     },
     setCategoryQuery: (state, { payload: numberCategory }) => {
       state.categoryQuery = numberCategory ? `category=${numberCategory}&` : '';
@@ -68,10 +68,7 @@ export const selectQuery = createSelector(
   (filters) => filters,
 );
 
-export const selectActiveIndex = createSelector(
-  (state: RootState) => state.filters.indexActiveCategory,
-  (state: RootState) => state.filters.indexActiveSort,
-  (indexActiveCategory, indexActiveSort) => ({ indexActiveCategory, indexActiveSort }),
-);
+export const selectActiveCategory = (state: RootState): number => state.filters.activeCategory;
+export const selectActiveSort = (state: RootState): number => state.filters.activeSort;
 
 export default filtersSlice.reducer;

@@ -1,17 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCategoryQuery, selectActiveIndex, setIndexActiveCategory } from '../../store/filtersSlice';
 import { selectAllowedValues } from '../../store/allowedValuesSlice';
+import { selectActiveCategory, setCategoryQuery, setIndexActiveCategory } from '../../store/filtersSlice';
 
 const Categories: React.FC = () => {
   const dispatch = useDispatch();
-  const { indexActiveCategory } = useSelector(selectActiveIndex);
+  
+  const activeCategory = useSelector(selectActiveCategory);
   const { categories } = useSelector(selectAllowedValues);
 
   const content = categories.map((category, index) => (
     <li
       key={category}
-      className={index === indexActiveCategory ? 'active' : ''}
+      className={index === activeCategory ? 'active' : ''}
       onClick={() => {
         dispatch(setCategoryQuery(index));
         dispatch(setIndexActiveCategory(index));
@@ -22,9 +23,9 @@ const Categories: React.FC = () => {
   ));
 
   return (
-    <ul className="filters__categories">
-      {content}
-    </ul>
+    <div className="filters__wrapper">
+      <ul className="filters__categories">{content}</ul>
+    </div>
   );
 };
 
