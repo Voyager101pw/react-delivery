@@ -15,7 +15,7 @@ interface AddToCartProps {
 
 type CartItemsType =  CartItem[] | [];
 
-const getPizzaById = async (id: string): Promise<any> => {
+const getPizzaById = async (id: string): Promise<CartItem | undefined> => {
   const { data: [searchedPizza] } = await axios.get<CartItemsType>(`http://localhost:5001/cartItems?id=${id}`);
   return searchedPizza;
 };
@@ -27,7 +27,7 @@ const AddToCart: React.FC<AddToCartProps> = (props): JSX.Element => {
   
 
   
-  const addPizzaToCart = async (): Promise<any> => {
+  const addPizzaToCart = async (): Promise<void> => {
     // extendedId: pizza type + pizza size + id
     const extendedId =  nameSelectedTypeRef.current + valueSelectedSizeRef.current + pizza.id;
     const pizzaFromCart = await getPizzaById(extendedId);
