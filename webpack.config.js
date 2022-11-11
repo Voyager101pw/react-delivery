@@ -69,8 +69,15 @@ module.exports = {
       // },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/, // исключать
-        use: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
+        exclude: /node_modules/,
+        loader: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
+        options: {
+          presets: [
+            "@babel/preset-env", // — создание кода, подходящего для старых браузеров.
+            "@babel/preset-react",  // — настройка транспилятора для работы с React-кодом.
+            "@babel/preset-typescript" // — настройка транспилятора для работы с TypeScript-кодом.
+          ]
+        }
       },
       {
         test: /\.svg$/,

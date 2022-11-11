@@ -3,14 +3,19 @@ import axios from 'axios';
 import { apiSlice } from '../../store/apiSlice';
 import { Pizza, CartItem } from '../../store/types';
 
+// interface AddToCartProps {
+//   pizza: Pizza;
+//   nameSelectedTypeRef: {
+//     current: string;
+//   };
+//   valueSelectedSizeRef: {
+//     current: number;
+//   };
+// }
 interface AddToCartProps {
   pizza: Pizza;
-  nameSelectedTypeRef: {
-    current: string;
-  };
-  valueSelectedSizeRef: {
-    current: number;
-  };
+  nameSelectedTypeRef: string;
+  valueSelectedSizeRef: number;
 }
 
 type CartItemsType =  CartItem[] | [];
@@ -29,7 +34,8 @@ const AddToCart: React.FC<AddToCartProps> = (props): JSX.Element => {
   
   const addPizzaToCart = async (): Promise<void> => {
     // extendedId: pizza type + pizza size + id
-    const extendedId =  nameSelectedTypeRef.current + valueSelectedSizeRef.current + pizza.id;
+    // const extendedId =  nameSelectedTypeRef.current + valueSelectedSizeRef.current + pizza.id;
+    const extendedId =  nameSelectedTypeRef + valueSelectedSizeRef + pizza.id;
     const pizzaFromCart = await getPizzaById(extendedId);
 
     pizzaFromCart // ternar.expres. for "pizza exist in cart?"
@@ -37,8 +43,10 @@ const AddToCart: React.FC<AddToCartProps> = (props): JSX.Element => {
       : addToCart({ // not exist
         ...pizza,
         id: extendedId, 
-        type: nameSelectedTypeRef.current,
-        size: valueSelectedSizeRef.current,
+        // type: nameSelectedTypeRef.current,
+        type: nameSelectedTypeRef,
+        // size: valueSelectedSizeRef.current,
+        size: valueSelectedSizeRef,
         amount: 1,
       });
   }; 
@@ -55,4 +63,4 @@ const AddToCart: React.FC<AddToCartProps> = (props): JSX.Element => {
   
 };
 
-export default AddToCart;
+export default React.memo(AddToCart);

@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface TypesProps {
-  idsTypes: number[];
+  pizzaTypes: number[];
   namesAllTypes: string[];
+  activeType: number;
   selectType: (id: number) => void;
 }
 
-const Types: React.FC<TypesProps> = ({ idsTypes: pizzaTypes, namesAllTypes, selectType }): JSX.Element => {
-  
-  const [activeType, setActiveType ] = useState(pizzaTypes[0]); // activeType contains index/id initial type
-
-  const onClick = (idType: number): void => {
-    setActiveType(idType);
-    selectType(idType); // set parent state
-  };
+const Types: React.FC<TypesProps> = (props): JSX.Element => {
+  const { pizzaTypes, namesAllTypes, activeType, selectType } = props;
 
   const renderButtons = pizzaTypes.map((idType: number) => (
     <li
       key={idType}
       className={idType === activeType ? 'active' : ''}
-      onClick={() => onClick(idType)}
+      onClick={() => selectType(idType)}
     >
       {namesAllTypes[idType]}
     </li>
   ));
 
-  return <>{renderButtons}</>;
+  return <ul className="card__list">{renderButtons}</ul>;
 };
 
-export default Types;
+export default React.memo(Types);

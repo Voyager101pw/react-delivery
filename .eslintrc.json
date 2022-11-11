@@ -1,10 +1,12 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest/globals": true
   },
   "extends": [
     "eslint:recommended",
+    "plugin:jest/recommended",
     // "airbnb",
     "airbnb-typescript",
     "plugin:react/recommended",
@@ -12,10 +14,10 @@
     "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     // "plugin:functional/recommended",
+    "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended"
   ],
-  // не поддерживает экспериментальне функции и нестандартный синтаксис (Flow или TypeScript)
-  // "parser": "@babel/eslint-parser",
+  // "parser": "@babel/eslint-parser", // не поддерживает экспериментальне функции и нестандартный синтаксис (Flow или TypeScript)
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -32,18 +34,19 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "testing-library"
   ],
   "rules": {
     // "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-filename-extension": [
-      "warn",
-      {
-        "extensions": [
-          ".tsx"
-        ]
-      }
-    ],
+    // "react/jsx-filename-extension": [
+    //   "warn",
+    //   {
+    //     "extensions": [
+    //       ".tsx"
+    //     ]
+    //   }
+    // ],
     "import/extensions": 0,
     "import/no-unresolved": 0,
     "no-console": 0,
@@ -65,13 +68,6 @@
         "code": 125
       }
     ],
-    // При включении этого правила будут генерироваться некоторые ошибки ESLint, которые будут исправлены путем явного добавления возвращаемого типа функций в ваш код.
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
-      }
-    ],
     "react/function-component-definition": [
       2,
       {
@@ -80,6 +76,29 @@
       }
     ],
     "no-unused-expressions": "off",
-    "@typescript-eslint/no-unused-expressions": 0
+
+    
+    "@typescript-eslint/explicit-function-return-type": [  // При включении этого правила будут генерироваться некоторые ошибки ESLint, которые будут исправлены путем явного добавления возвращаемого типа функций в ваш код.
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/no-unused-expressions": 0,
+
+
+    // Jest rules
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    
+
+    // Testing-library rules
+    "testing-library/await-async-query": "error",
+		"testing-library/no-await-sync-query": "error",
+		"testing-library/no-debugging-utils": "warn",
+		"testing-library/no-dom-import": "off"
   }
 }

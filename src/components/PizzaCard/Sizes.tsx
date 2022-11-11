@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface SizesProps {
-  idsSizes: number[];
+  pizzaSizes: number[];
   valuesAllSize: number[];
+  activeSize: number;
   selectSize: (idSize: number) => void;
 }
 
-const Sizes: React.FC<SizesProps> = ({ idsSizes, valuesAllSize, selectSize }) => {
+const Sizes: React.FC<SizesProps> = (props): JSX.Element => {
+  const { pizzaSizes, valuesAllSize, activeSize, selectSize } = props;
 
-  const [activeSize, setActiveSize ] = useState(idsSizes[0]); // activeSize contains index/id initial size value
-
-  const onClick = (idSize: number): void => {
-    setActiveSize(idSize);
-    selectSize(idSize); // set parent state
-  };
-
-  const renderButtons = idsSizes.map((idSize: number) => (
+  const renderButtons = pizzaSizes.map((idSize: number) => (
     <li
       key={idSize}
       className={idSize === activeSize ? 'active' : ''}
-      onClick={() => onClick(idSize)}
+      onClick={() => selectSize(idSize)}
     >
       {valuesAllSize[idSize]}
     </li>
   ));
 
-  return <>{renderButtons}</>;
+  return <ul className="card__list">{renderButtons}</ul>;
 };
 
-export default Sizes;
+export default React.memo(Sizes);

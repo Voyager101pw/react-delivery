@@ -11,57 +11,57 @@ interface PizzaCardProps {
 }
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }): JSX.Element => {
-  const {
-    imageUrl, price, name, sizes, types,
-  } = pizza;
-  
+  const { imageUrl, price, name, sizes, types } = pizza;
+
   const { allowedTypes, allowedSizes } = useSelector(selectAllowedValues);
 
-  const idSelectedTypeRef = useRef(types[0]);
-  const idSelectedSizeRef = useRef(sizes[0]);
-  const nameSelectedTypeRef = useRef(allowedTypes[types[0]]);
-  const valueSelectedSizeRef = useRef(allowedSizes[sizes[0]]);
-  
-  
-  const setSelectedType = useCallback((newIdType: number): void => {
-    idSelectedTypeRef.current = newIdType;
-    nameSelectedTypeRef.current = allowedTypes[newIdType];
-  }, []);
-  
-  const setSelectedSize = useCallback((newIdSize: number): void => {
-    idSelectedSizeRef.current = newIdSize;
-    valueSelectedSizeRef.current = allowedSizes[newIdSize];
-  }, []);
-  
+  const [activeType, setActiveType] = React.useState(types[0]); // id type: number
+  const [activeSize, setActiveSize] = React.useState(sizes[0]); // id size: number
 
-  
+  const [nameType, setNameType] = React.useState(allowedTypes[types[0]]); // name needed for logic add to cart feature
+  const [valueSize, setValueSice] = React.useState(allowedSizes[sizes[0]]); // value needed for logic add to cart feature
+
+  const setSelectedType = useCallback(
+    (newIdType: number): void => {
+      setActiveType(newIdType);
+      setNameType(allowedTypes[newIdType]);
+    },
+    [allowedTypes],
+  );
+
+  const setSelectedSize = useCallback(
+    (newIdSize: number): void => {
+      setActiveSize(newIdSize);
+      setValueSice(allowedSizes[newIdSize]);
+    },
+    [allowedSizes],
+  );
+
   return (
     <div className="card content__card">
-      <img className="card__icon" src={imageUrl} alt={name} />
-      <div className="card__title">{name}</div>
-      <div className="card__content">
-        <ul className="card__list">
-          <Types 
-            idsTypes={types} 
-            namesAllTypes={allowedTypes} 
-            selectType={setSelectedType}
-          />  
-        </ul>
-        <ul className="card__list">
+        <img className="card__icon" src={imageUrl} alt={name} />
+        <div className="card__title">{name}</div>
+        <div className="card__content">
+        <Types
+          pizzaTypes={types}
+          namesAllTypes={allowedTypes}
+          activeType={activeType}
+          selectType={setSelectedType}
+        />
         <Sizes
-          idsSizes={sizes}
+          pizzaSizes={sizes}
           valuesAllSize={allowedSizes}
           selectSize={setSelectedSize}
-        />  
-        </ul>
+          activeSize={activeSize}
+        />
       </div>
       <div className="card__footer">
         <div className="card__price">{`от ${price} ₽`}</div>
-          <AddToCart 
+        <AddToCart
           pizza={pizza}
-          nameSelectedTypeRef={nameSelectedTypeRef}
-          valueSelectedSizeRef={valueSelectedSizeRef}
-          />
+          nameSelectedTypeRef={nameType}
+          valueSelectedSizeRef={valueSize}
+        />
       </div>
     </div>
   );
