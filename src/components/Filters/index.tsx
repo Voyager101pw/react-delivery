@@ -1,5 +1,5 @@
 import React from 'react';
-import Categories from './Categories';
+import Categories from './Categories/Categories';
 import SortPopup from './SortPopup';
 import { Outlet } from 'react-router-dom';
 
