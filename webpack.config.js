@@ -47,8 +47,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
         exclude: /node_modules/,
       },
       {
@@ -60,6 +60,12 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.ts(x)?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      
       // {
       //   test: /\.pug$/,
       //   loader: '@webdiscus/pug-loader',
@@ -67,18 +73,7 @@ module.exports = {
       //     method: 'render', // fastest method to generate static HTML files
       //   },
       // },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
-        options: {
-          presets: [
-            "@babel/preset-env", // — создание кода, подходящего для старых браузеров.
-            "@babel/preset-react",  // — настройка транспилятора для работы с React-кодом.
-            "@babel/preset-typescript" // — настройка транспилятора для работы с TypeScript-кодом.
-          ]
-        }
-      },
+      
       {
         test: /\.svg$/,
         use: '@svgr/webpack',
