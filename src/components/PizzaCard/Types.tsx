@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface TypesProps {
+interface PropTypes {
   pizzaTypes: number[];
   namesAllTypes: string[];
   activeType: number;
   selectType: (id: number) => void;
 }
 
-const Types: React.FC<TypesProps> = (props): JSX.Element => {
+const Types: React.FC<PropTypes> = (props): JSX.Element => {
   const { pizzaTypes, namesAllTypes, activeType, selectType } = props;
 
   const renderButtons = pizzaTypes.map((idType: number) => (

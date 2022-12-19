@@ -6,14 +6,12 @@ import { store } from './store';
 import App from './App';
 
 import './scss/app.scss';
-import { fetchData } from './store/allowedValuesSlice';
 
 // import reportWebVitals from './reportWebVitals.js';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = ReactDOM.createRoot(container);
 
-store.dispatch(fetchData());
 root.render(
   <Provider store={store}>
     <App />

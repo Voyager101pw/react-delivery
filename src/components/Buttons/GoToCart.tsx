@@ -1,15 +1,12 @@
 import React from 'react';
 import CartIcon from '../../assets/img/cart-icon.svg';
-import { useGetCartItemsQuery } from '../../store/apiSlice';
+import { useAppSelector } from '../../store/hooks';
+import { selectCartItems } from '../../store/slices/cart';
 
 const CartBtn: React.FC = () => {
-  const { data: cart = [] } = useGetCartItemsQuery();
-  const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
-    {
-      amountPizzas: acc.amountPizzas + pizzaObj.amount,
-      amountPrice: acc.amountPrice + pizzaObj.amount * pizzaObj.price,
-    }
-  ), { amountPizzas: 0, amountPrice: 0 });
+  const cartItems = useAppSelector(selectCartItems);
+  const amountPizzas = cartItems.reduce((acc, cartItem) => acc + cartItem.amount, 0);
+  const amountPrice = cartItems.reduce((acc, cartItem) => acc + cartItem.price * cartItem.amount, 0);
 
   return (
     <button type="button" className="btn header__btn">

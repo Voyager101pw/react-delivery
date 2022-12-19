@@ -1,16 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import allowedValuesReducer from './allowedValuesSlice';
-import filterModReducer from './filtersSlice';
-import { apiSlice } from './apiSlice';
+import * as reducer from './slices';
 
-export const store = configureStore({
-  reducer: {
-    allowedValues: allowedValuesReducer,
-    filters: filterModReducer,
-    [apiSlice.reducerPath]: apiSlice.reducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
-  // Применяем мидлвары с логикой, которые создаются при использовании createApi
-});
+export const store = configureStore({ reducer });
 
+// Выводим типы `RootState` и `AppDispatch` из самого хранилища
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

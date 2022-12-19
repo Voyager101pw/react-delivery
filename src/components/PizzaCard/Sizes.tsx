@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface SizesProps {
+interface PropTypes {
   pizzaSizes: number[];
   valuesAllSize: number[];
-  activeSize: number;
   selectSize: (idSize: number) => void;
+  activeSize: number;
 }
 
-const Sizes: React.FC<SizesProps> = (props): JSX.Element => {
+const Sizes: React.FC<PropTypes> = (props): JSX.Element => {
   const { pizzaSizes, valuesAllSize, activeSize, selectSize } = props;
 
   const renderButtons = pizzaSizes.map((idSize: number) => (

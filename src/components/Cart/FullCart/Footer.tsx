@@ -1,10 +1,11 @@
 import React from 'react';
-import { useGetCartItemsQuery } from '../../store/apiSlice';
-import { GetBack, PayNow } from '../Buttons';
+import { useAppSelector } from '../../../store/hooks';
+import { selectCartItems } from '../../../store/slices/cart';
+import { GetBack, PayNow } from '../../Buttons';
 
 const Footer:React.FC = () => {
-  const { data: cart = [] } = useGetCartItemsQuery();
-  const { amountPizzas, amountPrice } = cart.reduce((acc, pizzaObj) => (
+  const cartItems = useAppSelector(selectCartItems);
+  const { amountPizzas, amountPrice } = cartItems.reduce((acc, pizzaObj) => (
     {
       amountPizzas: acc.amountPizzas + pizzaObj.amount,
       amountPrice: acc.amountPrice + pizzaObj.amount * pizzaObj.price,

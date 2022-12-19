@@ -1,19 +1,17 @@
 import React from 'react';
 import PizzaCard from '../components/PizzaCard';
-import Spinner from '../components/Spinner';
-import { useFetchPizza } from '../hooks';
-import { Pizza } from '../store/types';
+import useFetchPizzas from '../hooks/useFetchPizzas';
+import type { IPizza } from '../store/slices/pizzas';
 
-const renderCards = (pizza: Pizza[]): JSX.Element[] =>
-  pizza.map((pizzaProp) => <PizzaCard pizza={pizzaProp} key={pizzaProp.id} />);
+const renderCards = (pizzas: IPizza[]): JSX.Element[] =>
+  pizzas.map((pizza) => <PizzaCard pizza={pizza} key={pizza.id} />);
 
 const Home: React.FC = () => {
-  const { pizza, pizzaIsLoading } = useFetchPizza();
-  const content = pizzaIsLoading ? <Spinner /> : renderCards(pizza);
+  const pizzas = useFetchPizzas();
   return (
     <div className="content">
       <h1 className="content__title">Все пиццы</h1>
-      <div className="content__cards">{content}</div>
+      <div className="content__cards">{renderCards(pizzas)}</div>
     </div>
   );
 };
