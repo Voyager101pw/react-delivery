@@ -8,14 +8,17 @@ const mode = process.env.NODE_ENV || 'development';
 module.exports = {
   mode,
   entry: path.join(__dirname, 'src/index.tsx'),
-  // entry: path.join(__dirname, 'src/index.js'),
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+
+    // https://webpack.js.org/configuration/resolve/#resolvealias
+    alias: {
+      fonts: path.resolve(__dirname, 'public/assets/fonts'),
+      img: path.resolve(__dirname, 'public/assets/img'),
+    },
   },
   output: {
     path: path.join(__dirname, 'dist'),
-
-    // для более быстрой компиляции рекомендуется использовать фиксированный publicPath (например , '/' или '').
     publicPath: './',
   },
 
@@ -27,12 +30,6 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    // watchFiles: {
-    //   paths: ['src/index.pug'],
-    //   options: {
-    //     usePolling: true,
-    //   },
-    // },
   },
   // devtool: 'source-map',
 
@@ -65,15 +62,6 @@ module.exports = {
         loader: 'ts-loader',
         exclude: /node_modules/,
       },
-      
-      // {
-      //   test: /\.pug$/,
-      //   loader: '@webdiscus/pug-loader',
-      //   options: {
-      //     method: 'render', // fastest method to generate static HTML files
-      //   },
-      // },
-      
       {
         test: /\.svg$/,
         use: '@svgr/webpack',
@@ -82,10 +70,16 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         type: 'asset/resource', // модули ресурсов заменяют ранее исп.loader такие как raw,url,file-loader.
         // https://webpack.js.org/guides/asset-modules/
+        generator: {
+          filename: 'assets/img/[name][ext]',
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]',
+        },
       },
     ],
   },

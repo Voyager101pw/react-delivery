@@ -1,5 +1,5 @@
 import React from 'react';
-import CartIcon from '../../assets/img/cart-icon.svg';
+import CartIcon from 'img/cart-icon.svg';
 import { useAppSelector } from '../../store/hooks';
 import { selectCartItems } from '../../store/slices/cart';
 

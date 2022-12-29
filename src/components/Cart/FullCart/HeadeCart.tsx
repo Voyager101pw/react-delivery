@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CartIcon from '../../../assets/img/cart-icon.svg';
-import BasketIcon from '../../../assets/img/basket-icon.svg';
+import CartIcon from 'img/cart-icon.svg';
+import BasketIcon from 'img/basket-icon.svg';
 import { useAppDispatch } from '../../../store/hooks';
 import { removeAllCartItem } from '../../../store/slices/cart';
 

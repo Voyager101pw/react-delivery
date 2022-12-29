@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BackIcon from '../../assets/img/arrow-back.svg';
+import BackIcon from 'img/arrow-back.svg';
 
 const GetBackBtn: React.FC = () => {
   return (
