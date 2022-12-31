@@ -7,3 +7,4 @@ const endpoints = {
 
 export const cartURL = [host, endpoints.cart].join('/');
 export const pizzasURL = [host, endpoints.pizzas].join('/');
+export const getPizzaURL = (id: string): string => [cartURL, id].join('/');

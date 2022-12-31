@@ -1,18 +1,18 @@
-import type { IPizza } from '../store/slices/pizzas';
+import type { Pizzas } from '../redux/pizzas/types';
 
 // =========== Sort class ===========
 
 interface ISort {
-  getSortedPizzas(): IPizza[];
+  getSortedPizzas(): Pizzas;
 }
 
 export class Sort implements ISort {
-  constructor(public items: IPizza[], public Strategy: new () => StrategySort) {
+  constructor(public items: Pizzas, public Strategy: new () => StrategySort) {
     this.items = items;
     this.Strategy = Strategy;
   }
 
-  getSortedPizzas(): IPizza[] {
+  getSortedPizzas(): Pizzas {
     // return this.strategy.sort(this.items);
     const strategy = new this.Strategy();
     return strategy.sort(this.items);
@@ -22,41 +22,41 @@ export class Sort implements ISort {
 // =========== Sort strategies ===========
 
 interface StrategySort {
-  sort(items: IPizza[]): IPizza[];
+  sort(items: Pizzas): Pizzas;
 }
 
 class ByPopularDESC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.slice().sort((a, b) => b.rating - a.rating);
   }
 }
 
 class ByPopularASC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.slice().sort((a, b) => a.rating - b.rating);
   }
 }
 
 class ByPriceDESC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.slice().sort((a, b) => b.price - a.price);
   }
 }
 
 class ByPriceASC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.slice().sort((a, b) => a.price - b.price);
   }
 }
 
 class ByAlphabetDESC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.slice().sort().reverse();
   }
 }
 
 class ByAlphabetASC implements StrategySort {
-  sort(items: IPizza[]): IPizza[] {
+  sort(items: Pizzas): Pizzas {
     return items.sort();
   }
 }

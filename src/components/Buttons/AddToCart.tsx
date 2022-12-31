@@ -1,29 +1,41 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addItemToCart, selectCartItemById, updateCartItem } from '../../store/slices/cart';
-import type { IPizza } from '../../store/slices/pizzas';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import {
+  addItemToCart,
+  selectCartItemById,
+  updateCartItem,
+} from '../../redux/cart/slice';
+import { addToCartMockAPI } from '../../redux/cart/asyncThunks';
+import type { Pizza } from '../../redux/pizzas/types';
 
 interface PropTypes {
-  pizza: IPizza;
+  pizza: Pizza;
   nameActiveType: string;
   numberActiveSize: number;
 }
 
-const AddToCart: React.FC<PropTypes> = ({ pizza, nameActiveType, numberActiveSize }): JSX.Element => {
+const AddToCart: React.FC<PropTypes> = ({
+  pizza,
+  nameActiveType,
+  numberActiveSize,
+}): JSX.Element => {
   const dispatch = useAppDispatch();
   const id = nameActiveType + numberActiveSize + pizza.id; // id > тонкая + 26 + 1 > "тонкая261"
-  const cartItem = useAppSelector((state) => selectCartItemById(state, id));
-
-  const addToCart = (): void => {
-    if (cartItem) { // Товар отсутствует в корзине -> создаем товар в корзине с полем amount = 0
+  const itemInCart = useAppSelector((state) => selectCartItemById(state, id));
+  
+  const handleAddToCart = (): void => {
+    if (itemInCart) {
+      // Товар отсутствует в корзине -> создаем товар в корзине с полем amount = 0
       dispatch(
         updateCartItem({
-          id: cartItem.id,
-          changes: { ...cartItem, amount: cartItem.amount + 1 },
+          id: itemInCart.id,
+          changes: { ...itemInCart, amount: itemInCart.amount + 1 },
         }),
       );
-    } else { // Товар существует в корзине -> увеличеваем поле amount на 1
-      const item = {
+      dispatch(updateCartMockAPI({ ...cartItem, amount: cartItem.amount + 1 }));
+    } else {
+      // Товар существует в корзине -> увеличеваем поле amount на 1
+      const cartItem = {
         id,
         imageUrl: pizza.imageUrl,
         name: pizza.name,
@@ -32,16 +44,16 @@ const AddToCart: React.FC<PropTypes> = ({ pizza, nameActiveType, numberActiveSiz
         price: pizza.price,
         amount: 1,
       };
-      dispatch(addItemToCart(item));
+      dispatch(addItemToCart(cartItem));
+      dispatch(addToCartMockAPI(cartItem)); 
     }
-    
   };
 
   return (
     <button
       type="button"
       className="btn btn--add btn--outline btn--positive card__add"
-      onClick={addToCart}
+      onClick={handleAddToCart}
     >
       Добавить
     </button>

@@ -1,19 +1,16 @@
 import React from 'react';
 import CartIcon from 'img/cart-icon.svg';
-import { useAppSelector } from '../../store/hooks';
-import { selectCartItems } from '../../store/slices/cart';
+import { useAppSelector } from '../../redux/store';
+import { selectCartDetails  } from '../../redux/cart/slice';
 
 const CartBtn: React.FC = () => {
-  const cartItems = useAppSelector(selectCartItems);
-  const amountPizzas = cartItems.reduce((acc, cartItem) => acc + cartItem.amount, 0);
-  const amountPrice = cartItems.reduce((acc, cartItem) => acc + cartItem.price * cartItem.amount, 0);
-
+  const { totalPizzas, totalPrice } = useAppSelector(selectCartDetails);
   return (
     <button type="button" className="btn header__btn">
-      <div className="btn__price">{`${amountPrice} ₽`}</div>
+      <div className="btn__price">{`${totalPrice} ₽`}</div>
       <div className="btn__delimiter" />
       <CartIcon className="btn__cart-icon" />
-      <div className="btn__price">{amountPizzas}</div>
+      <div className="btn__price">{totalPizzas}</div>
     </button>
   );
 };

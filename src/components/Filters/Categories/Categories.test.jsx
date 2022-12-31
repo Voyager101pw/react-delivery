@@ -1,7 +1,7 @@
 import { screen, render, fireEvent } from '@testing-library/react';
 import * as reduxHooks from 'react-redux';
 import Categories from './Categories';
-import * as actions from '../../../store/filtersSlice';
+import * as actions from '../../../redux/filtersSlice';
 
 const mockState = {
   allowedValues: {

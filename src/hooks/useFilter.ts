@@ -1,8 +1,9 @@
-import { useAppSelector } from '../store/hooks';
-import { selectIndexActiveCategory } from '../store/slices/categories';
-import { IPizza, selectPizzas } from '../store/slices/pizzas';
-import { selectIndexActiveSort } from '../store/slices/sorts';
 import { strategies, Sort } from './SortStrategy';
+import { useAppSelector } from '../redux/store';
+import { selectPizzas } from '../redux/pizzas/selectors';
+import { selectIndexActiveCategory } from '../redux/categories/selectors';
+import { selectIndexActiveSort } from '../redux/sorts/selectors';
+import type { Pizzas } from '../redux/pizzas/types';
 
 // Назначение хука:
 // Используется для получения отфильтрованного
@@ -13,7 +14,7 @@ import { strategies, Sort } from './SortStrategy';
 // изменяет indexActiveSort и indexActiveCategory
 // Это приведет к повторному выполнению хука.
 
-const useFetchPizzas = (): IPizza[] => {
+const useFetchPizzas = (): Pizzas => {
   const pizzas = useAppSelector(selectPizzas);
   const indexActiveSort = useAppSelector(selectIndexActiveSort);
   const indexActiveCategory = useAppSelector(selectIndexActiveCategory);

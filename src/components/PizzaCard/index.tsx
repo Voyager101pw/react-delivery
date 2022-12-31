@@ -2,13 +2,13 @@ import React, { useCallback  } from 'react';
 import { AddToCart } from '../Buttons';
 import Types from './Types';
 import Sizes from './Sizes';
-import { selectSizes } from '../../store/slices/sizes';
-import { selectTypes } from '../../store/slices/types';
-import type { IPizza } from '../../store/slices/pizzas';
-import { useAppSelector } from '../../store/hooks';
+import { selectSizes } from '../../redux/sizes/selectors';
+import { selectTypes } from '../../redux/types/selectors';
+import type { Pizza } from '../../redux/pizzas/types';
+import { useAppSelector } from '../../redux/store';
 
 interface PropTypes {
-  pizza: IPizza;
+  pizza: Pizza;
 }
 
 const PizzaCard: React.FC<PropTypes> = ({ pizza }): JSX.Element => {

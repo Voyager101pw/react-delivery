@@ -1,9 +1,9 @@
 import React from 'react';
-import { useAppSelector } from '../../../store/hooks';
-import { selectCartItems  } from '../../../store/slices/cart';
+import { useAppSelector } from '../../../redux/store';
+import { selectCartItems  } from '../../../redux/cart/slice';
 
-import CartTop from './HeadeCart';
-import CartItem from './CartItem';
+import CartTop from './Header/HeadeCart';
+import CartItem from './CartIem';
 import Footer from './Footer';
 
 const FullCart: React.FC = () => {
@@ -16,9 +16,7 @@ const FullCart: React.FC = () => {
       <div className="cart__top">
         <CartTop />
       </div>
-
       <div className="cart__items">{cartItems}</div>
-
       <div className="cart__footer">
         <Footer />
       </div>

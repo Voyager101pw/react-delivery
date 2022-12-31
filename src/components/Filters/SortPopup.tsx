@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import DropIcon from 'img/drop-icon.svg';
-import { selectIndexActiveSort, selectSortNames, setActiveSort } from '../../store/slices/sorts';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setActiveSort } from '../../redux/sorts/slice';
+import { selectIndexActiveSort, selectSortNames } from '../../redux/sorts/selectors';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const SortPopup: React.FC = () => {
   const [visiblePopup, setVisiblePopup] = useState(false);

@@ -1,11 +1,10 @@
 import React from 'react';
 import { FullCart, EmptyCart } from '../components/Cart';
-import { useAppSelector } from '../store/hooks';
-import { selectCartItems } from '../store/slices/cart';
+import { useAppSelector } from '../redux/store';
+import { selectCartItems } from '../redux/cart/slice';
 
 const Cart: React.FC = () => {
-  const cartItems = useAppSelector(selectCartItems);
-  const cartIsEmpty = !cartItems.length;
+  const cartIsEmpty = !useAppSelector(selectCartItems).length;
   return cartIsEmpty ? <EmptyCart /> : <FullCart />;
 };
 

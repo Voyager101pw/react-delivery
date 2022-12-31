@@ -1,3 +1,8 @@
+export type CartDetails = {
+  totalPizzas: number;
+  totalPrice: number;
+};
+
 export type CartItem = {
   id: string;
   name: string;

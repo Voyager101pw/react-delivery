@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { setActiveCategory } from '../../../redux/categories/slice';
 import {
   selectCategoryNames,
   selectIndexActiveCategory,
-  setActiveCategory,
-} from '../../../store/slices/categories';
+} from '../../../redux/categories/selectors';
 
 const Categories: React.FC = () => {
   const dispatch = useAppDispatch();

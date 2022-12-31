@@ -2,8 +2,8 @@ import React from 'react';
 
 import CartIcon from 'img/cart-icon.svg';
 import BasketIcon from 'img/basket-icon.svg';
-import { useAppDispatch } from '../../../store/hooks';
-import { removeAllCartItem } from '../../../store/slices/cart';
+import { useAppDispatch } from '../../../../redux/store';
+import { removeAllCartItem } from '../../../../redux/cart/slice';
 
 const HeaderCart: React.FC = () => {
   const dispatch = useAppDispatch();

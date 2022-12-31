@@ -5,8 +5,8 @@ import type { TypedUseSelectorHook } from 'react-redux';
 import pizzas from './pizzas/slice';
 import cart from './cart/slice';
 import categories from './categories/slice';
-import sorts from './sorts/sorts';
-import sizes from './sizes/sizes';
+import sorts from './sorts/slice';
+import sizes from './sizes/slice';
 import types from './types/slice';
 
 export const store = configureStore({
