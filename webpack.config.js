@@ -7,15 +7,20 @@ const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode,
+
   entry: path.join(__dirname, 'src/index.tsx'),
-  // entry: path.join(__dirname, 'src/index.js'),
+  
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      // https://webpack.js.org/configuration/resolve/#resolvealias
+      fonts: path.resolve(__dirname, 'public/assets/fonts'),
+      img: path.resolve(__dirname, 'public/assets/img'),
+    },
   },
-  output: {
-    path: path.join(__dirname, 'dist', 'public'),
 
-    // для более быстрой компиляции рекомендуется использовать фиксированный publicPath (например , '/' или '').
+  output: {
+    path: path.join(__dirname, 'dist'),
     publicPath: '/',
   },
 
@@ -27,15 +32,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    // watchFiles: {
-    //   paths: ['src/index.pug'],
-    //   options: {
-    //     usePolling: true,
-    //   },
-    // },
   },
-  // devtool: 'source-map',
 
+  
   plugins: [
     new HtmlWebpackPlugin(
       {
@@ -44,15 +43,16 @@ module.exports = {
     ),
     new MiniCssExtractPlugin(),
   ],
+  
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx)$/i,
         use: 'babel-loader', // транспилирует из es2015+ в старые стандарты ES5(2009) для поддержки.
         exclude: /node_modules/,
       },
       {
-        test: /\.s([ac]|c)ss$/,
+        test: /\.s([ac]|c)ss$/i,
         use: [
           mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -61,31 +61,28 @@ module.exports = {
         ],
       },
       {
-        test: /\.ts(x)?$/,
+        test: /\.ts(x)?$/i,
         loader: 'ts-loader',
         exclude: /node_modules/,
       },
-      
-      // {
-      //   test: /\.pug$/,
-      //   loader: '@webdiscus/pug-loader',
-      //   options: {
-      //     method: 'render', // fastest method to generate static HTML files
-      //   },
-      // },
-      
       {
-        test: /\.svg$/,
+        test: /\.svg$/i,
         use: '@svgr/webpack',
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
         type: 'asset/resource', // модули ресурсов заменяют ранее исп.loader такие как raw,url,file-loader.
         // https://webpack.js.org/guides/asset-modules/
+        generator: {
+          filename: 'assets/img/[name][ext]',
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]',
+        },
       },
     ],
   },

@@ -1,66 +1,50 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { AddToCart } from '../Buttons';
-import { Pizza } from '../../store/types';
-import Types from './Types';
+import TypesButtons from './Types';
 import Sizes from './Sizes';
-import { useSelector } from 'react-redux';
-import { selectAllowedValues } from '../../store/allowedValuesSlice';
+import type { Pizza } from '../../redux/pizzas/types';
+import type { TypeIndex } from '../../redux/types/types';
+import type { SizeIndex } from '../../redux/sizes/types';
 
-interface PizzaCardProps {
+interface PropTypes {
   pizza: Pizza;
 }
 
-const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }): JSX.Element => {
+const PizzaCard: React.FC<PropTypes> = ({ pizza }): JSX.Element => {
   const { imageUrl, price, name, sizes, types } = pizza;
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
 
-  const { allowedTypes, allowedSizes } = useSelector(selectAllowedValues);
+  const setPizzaType = useCallback((id: TypeIndex): void => {
+    setActiveType(id);
+  }, []);
 
-  const [activeType, setActiveType] = React.useState(types[0]); // id type: number
-  const [activeSize, setActiveSize] = React.useState(sizes[0]); // id size: number
-
-  const [nameType, setNameType] = React.useState(allowedTypes[types[0]]); // name needed for logic add to cart feature
-  const [valueSize, setValueSice] = React.useState(allowedSizes[sizes[0]]); // value needed for logic add to cart feature
-
-  const setSelectedType = useCallback(
-    (newIdType: number): void => {
-      setActiveType(newIdType);
-      setNameType(allowedTypes[newIdType]);
-    },
-    [allowedTypes],
-  );
-
-  const setSelectedSize = useCallback(
-    (newIdSize: number): void => {
-      setActiveSize(newIdSize);
-      setValueSice(allowedSizes[newIdSize]);
-    },
-    [allowedSizes],
-  );
+  const setPizzaSize = useCallback((id: SizeIndex): void => {
+    setActiveSize(id);
+  }, []);
 
   return (
     <div className="card content__card">
-        <img className="card__icon" src={imageUrl} alt={name} />
-        <div className="card__title">{name}</div>
-        <div className="card__content">
-        <Types
-          pizzaTypes={types}
-          namesAllTypes={allowedTypes}
+      <img className="card__icon" src={imageUrl} alt={name} />
+      <div className="card__title">{name}</div>
+      <div className="card__content">
+        <TypesButtons
+          types={types}
           activeType={activeType}
-          selectType={setSelectedType}
+          setPizzaType={setPizzaType}
         />
         <Sizes
-          pizzaSizes={sizes}
-          valuesAllSize={allowedSizes}
-          selectSize={setSelectedSize}
+          sizes={sizes}
           activeSize={activeSize}
+          setPizzaSize={setPizzaSize}
         />
       </div>
       <div className="card__footer">
         <div className="card__price">{`от ${price} ₽`}</div>
         <AddToCart
           pizza={pizza}
-          nameSelectedTypeRef={nameType}
-          valueSelectedSizeRef={valueSize}
+          activeType={activeType}
+          activeSize={activeSize}
         />
       </div>
     </div>

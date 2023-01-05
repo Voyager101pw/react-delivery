@@ -1,32 +1,29 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllowedValues } from '../../../store/allowedValuesSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { setActiveCategory } from '../../../redux/categories/slice';
 import {
-  selectActiveCategory,
-  setCategoryQuery,
-  setIndexActiveCategory,
-} from '../../../store/filtersSlice';
+  selectCategoryNames,
+  selectIndexActiveCategory,
+} from '../../../redux/categories/selectors';
 
 const Categories: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const activeCategory = useAppSelector(selectIndexActiveCategory);
+  const categoryNames = useAppSelector(selectCategoryNames);
 
-  const activeCategory = useSelector(selectActiveCategory);
-  const { categories } = useSelector(selectAllowedValues);
-
-  const content = categories.map((category, index) => (
+  const content = categoryNames.map((categoryName, index) => (
     <li
-      key={category}
+      key={categoryName}
       className={index === activeCategory ? 'active' : undefined}
       onClick={() => {
-        dispatch(setCategoryQuery(index));
-        dispatch(setIndexActiveCategory(index));
+        dispatch(setActiveCategory(index));
       }}
     >
-      {category}
+      {categoryName}
     </li>
   ));
 
-  return categories.length ? (
+  return categoryNames.length ? (
     <div className="filters__wrapper">
       <ul className="filters__categories">{content}</ul>
     </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-
-import pizzaLogo from '../assets/img/pizza.png';
+import pizzaLogo from 'img/pizza.png';
 import { GoToCart } from './Buttons';
 
 const Header: React.FC = () => (

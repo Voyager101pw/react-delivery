@@ -1,10 +1,9 @@
 import React from 'react';
-import { useGetCartItemsQuery } from '../store/apiSlice';
 import { FullCart, EmptyCart } from '../components/Cart';
+import { useAppSelector } from '../redux/store';
 
 const Cart: React.FC = () => {
-  const { data: cart = [] } = useGetCartItemsQuery();
-  const cartIsEmpty = !cart.length;
+  const cartIsEmpty = !useAppSelector((state) => state.cart.ids.length);
   return cartIsEmpty ? <EmptyCart /> : <FullCart />;
 };
 

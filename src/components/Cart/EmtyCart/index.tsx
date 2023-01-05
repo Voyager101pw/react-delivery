@@ -1,6 +1,6 @@
 import React from 'react';
-import { GetBack } from '../Buttons';
-import EmptyCartIcon from '../../assets/img/empty-cart-icon.svg';
+import { GetBack } from '../../Buttons';
+import EmptyCartIcon from 'img/empty-cart-icon.svg';
 
 const EmptyCart: React.FC = () => (
   <div className="empty-cart">

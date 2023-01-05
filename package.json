@@ -2,6 +2,7 @@
   "name": "react-delivery",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://react-delivery-theta.vercel.app/",
   "main": "./src/index.tsx",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
@@ -10,8 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "gh-pages": "^4.0.0",
     "json-server": "^0.17.0",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -22,11 +23,12 @@
     "webpack-cli": "^4.10.0"
   },
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "test": "react-scripts test",
     "build": "cross-env NODE_ENV=production webpack",
-    "server": "npx json-server -p=5001 --watch public/db.json",
-    "frontend": "npx webpack serve --open"
+    "dev": "npx webpack serve --open",
+    "test": "react-scripts test",
+    "prebuild": "rm -rf dist",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
