@@ -1,48 +1,49 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { cartURL, getPizzaURL } from '../routes';
+import { urlToCart, getUrlToCartItem } from '../routes';
 import type { CartItems, CartItem } from './types';
 
 export const fetchCart = createAsyncThunk<CartItems>(
   'cart/fetchCart/',
   async () => {
-    const res = await axios.get(cartURL);
-    console.log(`Делаю GET запрос на ${cartURL} `);
+    const res = await axios.get(urlToCart);
     return res.data;
   },
 );
 
-export const addToCartMockAPI = createAsyncThunk<void, CartItem>(
+// Добавить товар в корзину. MockAPI endpoint: cart
+export const addToCartMockAPI = createAsyncThunk<CartItem, CartItem>(
   'cart/addToCartMockAPI/',
-  async (cartItems) => {
-    console.log(`Делаю POST запрос на ${cartURL}
-    POST = {
-      ${JSON.stringify(cartItems, null, '  ')}
-    }
-    `);
-    await axios.post(cartURL, cartItems);
-  },
-);
-
-// Увеличить количество пиццы в корзине MockApi
-export const updateCartMockAPI = createAsyncThunk<void, CartItem>(
-  'product/updateCartMockAPI',
   async (cartItem) => {
-    const url = getPizzaURL(cartItem.id);
-    
-    console.log(`Делаю PUT запрос на ${url}
-    PUT = { amount: ${cartItem.amount}}
-    `);
-
-    await axios.put(url, { amount: cartItem.amount });
+    const { data } = await axios.post<CartItem>(urlToCart, cartItem);
+    return data;
   },
 );
 
-export const removeItemMockAPI = createAsyncThunk<void, string>(
+// Увеличить количество пиццы в корзине. MockApi endpoint cart
+export const updateCartMockAPI = createAsyncThunk<CartItem, CartItem>(
+  'cart/updateCartMockAPI',
+  async (updatedCartItem) => {
+    const url = getUrlToCartItem(updatedCartItem.id);
+    const res = await axios.put(url, updatedCartItem);
+    return res.data;
+  },
+);
+
+export const removeItemMockAPI = createAsyncThunk<CartItem, CartItem['id']>(
   'cart/removeItemMockAPI',
   async (id) => {
-    const url = getPizzaURL(id);
-    console.log(`Делаю DELETE запрос на ${url}`);
-    await axios.delete(url);
+    const url = getUrlToCartItem(id);
+    const { data: removedCartItem } = await axios.delete(url);
+    return removedCartItem;
+  },
+);
+
+export const clearCartMockApi = createAsyncThunk<void, number[]>(
+  'cart/clearCartMockApi',
+  async (ids) => {
+    ids.forEach((id) => {
+      axios.delete(getUrlToCartItem(id));
+    });
   },
 );

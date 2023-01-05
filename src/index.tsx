@@ -14,7 +14,6 @@ const container = document.getElementById('root');
 if (container) {
   store.dispatch(fetchPizzas());
   store.dispatch(fetchCart());
-
   const root = ReactDOM.createRoot(container);
   root.render(
     <Provider store={store}>

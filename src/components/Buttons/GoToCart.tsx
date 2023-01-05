@@ -1,7 +1,7 @@
 import React from 'react';
 import CartIcon from 'img/cart-icon.svg';
 import { useAppSelector } from '../../redux/store';
-import { selectCartDetails  } from '../../redux/cart/slice';
+import { selectCartDetails } from '../../redux/cart/selectors';
 
 const CartBtn: React.FC = () => {
   const { totalPizzas, totalPrice } = useAppSelector(selectCartDetails);

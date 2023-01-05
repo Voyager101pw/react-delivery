@@ -4,7 +4,8 @@ export type CartDetails = {
 };
 
 export type CartItem = {
-  id: string;
+  id?: number;         // Его назначает MockAPI = id:1 , id: 2, id: 3, и тд. Используется для запросов.
+  extendedId: string; // extendedId = имяПиццы+типПиццы+размерПиццы. Используется стором
   name: string;
   type: string;
   size: number;
@@ -12,5 +13,6 @@ export type CartItem = {
   price: number;
   amount: number;
 };
+
 
 export type CartItems = CartItem[];

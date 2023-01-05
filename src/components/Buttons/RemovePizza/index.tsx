@@ -1,18 +1,17 @@
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { removeCartItem } from '../../../redux/cart/slice';
 import { removeItemMockAPI } from '../../../redux/cart/asyncThunks';
+import { CartItem } from '../../../redux/cart/types';
 
 interface PropTypes {
-  id: string;
+  cartItem: CartItem;
 }
 
-const RemoveCartItem: React.FC<PropTypes> = ({ id }) => {
+const RemoveCartItem: React.FC<PropTypes> = ({ cartItem }) => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {
-    dispatch(removeCartItem(id));
-    dispatch(removeItemMockAPI(id));
+    dispatch(removeItemMockAPI(cartItem.id));
   };
 
   return (

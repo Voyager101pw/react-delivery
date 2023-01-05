@@ -1,68 +1,50 @@
-import React, { useCallback  } from 'react';
+import React, { useCallback } from 'react';
 import { AddToCart } from '../Buttons';
-import Types from './Types';
+import TypesButtons from './Types';
 import Sizes from './Sizes';
-import { selectSizes } from '../../redux/sizes/selectors';
-import { selectTypes } from '../../redux/types/selectors';
 import type { Pizza } from '../../redux/pizzas/types';
-import { useAppSelector } from '../../redux/store';
+import type { TypeIndex } from '../../redux/types/types';
+import type { SizeIndex } from '../../redux/sizes/types';
 
 interface PropTypes {
   pizza: Pizza;
 }
 
 const PizzaCard: React.FC<PropTypes> = ({ pizza }): JSX.Element => {
-  const { imageUrl, price, name, sizes: pizzaSizes, types: pizzaTypes } = pizza;
+  const { imageUrl, price, name, sizes, types } = pizza;
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
 
-  const allowedTypes = useAppSelector(selectTypes); // ["тонкая", "традиционная", "итальянская"]
-  const allowedSizes = useAppSelector(selectSizes); // [26, 30, 40]
+  const setPizzaType = useCallback((id: TypeIndex): void => {
+    setActiveType(id);
+  }, []);
 
-  const [activeType, setActiveType] = React.useState(pizzaTypes[0]); // activeType = 0 соотвествует типу "тонкая"
-  const [activeSize, setActiveSize] = React.useState(pizzaSizes[0]); // activeSize = 0 соотвествует размеру 26
-
-  const [nameActiveType, setNameActiveType] = React.useState(allowedTypes[activeType]);     // nameActiveType = "тонкая"
-  const [numberActiveSize, setNumberActiveSize] = React.useState(allowedSizes[activeSize]); // numberActiveSize = 26
-
-  const setSelectedType = useCallback(
-    (id: number): void => {
-      setActiveType(id);
-      setNameActiveType(allowedTypes[id]);
-    },
-    [allowedTypes],
-  );
-
-  const setSelectedSize = useCallback(
-    (id: number): void => {
-      setActiveSize(id);
-      setNumberActiveSize(allowedSizes[id]);
-    },
-    [allowedSizes],
-  );
+  const setPizzaSize = useCallback((id: SizeIndex): void => {
+    setActiveSize(id);
+  }, []);
 
   return (
     <div className="card content__card">
-        <img className="card__icon" src={imageUrl} alt={name} />
-        <div className="card__title">{name}</div>
-        <div className="card__content">
-        <Types
-          pizzaTypes={pizzaTypes}      // Доступные типы для данной пиццы
-          namesAllTypes={allowedTypes} // Все типы
-          activeType={activeType}      // Индекс(число) выбранного типа пиццы
-          selectType={setSelectedType}
+      <img className="card__icon" src={imageUrl} alt={name} />
+      <div className="card__title">{name}</div>
+      <div className="card__content">
+        <TypesButtons
+          types={types}
+          activeType={activeType}
+          setPizzaType={setPizzaType}
         />
         <Sizes
-          pizzaSizes={pizzaSizes}      // Доступные размеры для пиццы
-          valuesAllSize={allowedSizes} // Все размеры
-          activeSize={activeSize}      // Индекс(число) выбранного размера пиццы
-          selectSize={setSelectedSize}
+          sizes={sizes}
+          activeSize={activeSize}
+          setPizzaSize={setPizzaSize}
         />
       </div>
       <div className="card__footer">
         <div className="card__price">{`от ${price} ₽`}</div>
         <AddToCart
           pizza={pizza}
-          nameActiveType={nameActiveType}
-          numberActiveSize={numberActiveSize}
+          activeType={activeType}
+          activeSize={activeSize}
         />
       </div>
     </div>

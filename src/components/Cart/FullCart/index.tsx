@@ -1,14 +1,14 @@
 import React from 'react';
 import { useAppSelector } from '../../../redux/store';
-import { selectCartItems  } from '../../../redux/cart/slice';
+import { selectCartItems  } from '../../../redux/cart/selectors';
 
-import CartTop from './Header/HeadeCart';
+import CartTop from './Header';
 import CartItem from './CartIem';
 import Footer from './Footer';
 
 const FullCart: React.FC = () => {
   const cartItems = useAppSelector(selectCartItems).map((cartItem) => (
-    <CartItem key={cartItem.id} cartItem={cartItem} />
+    <CartItem key={cartItem.extendedId} extendedId={cartItem.extendedId} />
   ));
 
   return (

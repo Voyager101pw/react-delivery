@@ -1,3 +1,5 @@
+import { CartItem } from './cart/types';
+
 const host = 'https://639e03343542a26130552410.mockapi.io';
 
 const endpoints = {
@@ -5,6 +7,7 @@ const endpoints = {
   pizzas: 'pizzas',
 };
 
-export const cartURL = [host, endpoints.cart].join('/');
-export const pizzasURL = [host, endpoints.pizzas].join('/');
-export const getPizzaURL = (id: string): string => [cartURL, id].join('/');
+export const urlToCart = [host, endpoints.cart].join('/');
+export const urlToPizzaList = [host, endpoints.pizzas].join('/');
+export const getUrlToCartItem = (id: CartItem['id']): string =>
+  [urlToCart, id].join('/');

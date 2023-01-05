@@ -1,12 +1,17 @@
 import React from 'react';
+import { selectCartItemById } from '../../../../redux/cart/selectors';
 import type { CartItem as ICartItem } from '../../../../redux/cart/types';
+import { useAppSelector } from '../../../../redux/store';
 import { AddOne, RemoveCartItem, RemoveOne } from '../../../Buttons';
 
 interface PropTypes {
-  cartItem: ICartItem;
+  extendedId: ICartItem['extendedId'];
 }
 
-const CartItem: React.FC<PropTypes> = ({ cartItem }) => {
+const CartItem: React.FC<PropTypes> = ({ extendedId }) => {
+  const cartItem = useAppSelector((state) =>
+    selectCartItemById(state, extendedId),
+  );
 
   return (
     <div className="item cart__item">
@@ -32,10 +37,10 @@ const CartItem: React.FC<PropTypes> = ({ cartItem }) => {
       </div>
 
       <div className="item__remove">
-       <RemoveCartItem id={cartItem.id} />
+        <RemoveCartItem cartItem={cartItem} />
       </div>
     </div>
   );
 };
 
-export default CartItem;
+export default React.memo(CartItem);

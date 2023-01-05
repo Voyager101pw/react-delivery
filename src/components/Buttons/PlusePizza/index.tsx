@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppDispatch } from '../../../redux/store';
-import { updateCartItem } from '../../../redux/cart/slice';
 import { updateCartMockAPI } from '../../../redux/cart/asyncThunks';
 import type { CartItem } from '../../../redux/cart/types';
 
@@ -12,13 +11,8 @@ const AddOne: React.FC<PropTypes> = ({ cartItem }) => {
   const dispatch = useAppDispatch();
 
   const handleClick = (): void => {
-    dispatch(
-      updateCartItem({
-        id: cartItem.id,
-        changes: { ...cartItem, amount: cartItem.amount + 1 },
-      }),
-    );
-    dispatch(updateCartMockAPI({ ...cartItem, amount: cartItem.amount + 1 }));
+    const updatedCartItem = { ...cartItem, amount: cartItem.amount + 1 };
+    dispatch(updateCartMockAPI(updatedCartItem));  // update cartItem in MockApi (endpoint: cart)
   };
 
   return (

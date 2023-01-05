@@ -1,5 +1,5 @@
 import React from 'react';
-import PizzaCard from '../components/PizzaCard';
+import PizzaCard from '../components/PizzaCard/index';
 import useFilter from '../hooks/useFilter';
 import type { Pizzas } from '../redux/pizzas/types';
 

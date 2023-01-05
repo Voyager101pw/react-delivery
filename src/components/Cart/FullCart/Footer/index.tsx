@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../../../../redux/store';
 import { GetBack, PayNow } from '../../../Buttons';
-import { selectCartDetails } from '../../../../redux/cart/slice';
+import { selectCartDetails } from '../../../../redux/cart/selectors';
 
 const Footer: React.FC = () => {
   const { totalPizzas, totalPrice } = useAppSelector(selectCartDetails);
